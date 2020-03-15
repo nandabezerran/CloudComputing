@@ -20,3 +20,9 @@
     justify-content: right;
     flex-wrap: wrap;
 }
+
+.addPhoto{
+    left: 92%;
+    position: sticky;
+    bottom: 4%;
+}

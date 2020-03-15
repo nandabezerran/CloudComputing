@@ -12,4 +12,13 @@ export class PhotoCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  likePhoto(): void{
+    this.data.youLiked = !this.data.youLiked;
+    if(this.data.youLiked){
+      this.data.likes++;
+    }
+    else{
+      this.data.likes--;
+    }
+  }
 }

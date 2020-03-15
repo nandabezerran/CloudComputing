@@ -1,12 +1,13 @@
 <mat-toolbar color='primary'>
     <mat-icon id="logo" (click)='redirectFeed()'>photo_filter</mat-icon>
 
-    <span id="searchBox">
+    <div id="searchBox">
+        
         <mat-form-field>
             <input matInput>
         </mat-form-field>
-        <mat-icon id="searchIcon">search</mat-icon>
-    </span>
+        <mat-icon id="searchIcon">search</mat-icon>   
+    </div>
     
     <span id="pictureMenu">
         <button mat-button [matMenuTriggerFor]="menu">
