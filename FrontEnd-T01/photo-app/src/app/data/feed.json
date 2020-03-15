@@ -1,0 +1,37 @@
+{
+    "entries": 
+    [
+        {
+            "user": "arinasanches",
+            "date": "13/03/2020",
+            "likes": 45,
+            "youLiked": true,
+            "userAvatar": "assets/img/arina1.jpg",
+            "postedPhoto": "assets/img/arina2.jpg" 
+        },
+        {
+            "user": "pedronunes",
+            "date": "15/03/2020",
+            "likes": 12,
+            "youLiked": false,
+            "userAvatar": "assets/img/pedro1.jpg",
+            "postedPhoto": "assets/img/pedro2.jpg" 
+        },
+        {
+            "user": "pedronunes",
+            "date": "15/03/2020",
+            "likes": 12,
+            "youLiked": false,
+            "userAvatar": "assets/img/pedro1.jpg",
+            "postedPhoto": "assets/img/pedro2.jpg" 
+        },
+        {
+            "user": "pedronunes",
+            "date": "15/03/2020",
+            "likes": 12,
+            "youLiked": false,
+            "userAvatar": "assets/img/pedro1.jpg",
+            "postedPhoto": "assets/img/pedro2.jpg" 
+        }
+    ]
+}

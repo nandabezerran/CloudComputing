@@ -1,0 +1,21 @@
+<mat-toolbar color='primary'>
+    <mat-icon id="logo" (click)='redirectFeed()'>photo_filter</mat-icon>
+
+    <span id="searchBox">
+        <mat-form-field>
+            <input matInput>
+        </mat-form-field>
+        <mat-icon id="searchIcon">search</mat-icon>
+    </span>
+    
+    <span id="pictureMenu">
+        <button mat-button [matMenuTriggerFor]="menu">
+            <img class='avatarImg' src="assets/img/avatar.png"></button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)='redirectProfile()'>Show profile</button>
+            <button mat-menu-item>Edit info</button>
+            <button mat-menu-item>Logout</button>
+        </mat-menu>
+    </span>
+
+</mat-toolbar>

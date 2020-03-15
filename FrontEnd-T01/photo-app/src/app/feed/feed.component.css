@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: center; 
+    flex-direction: row;
+    margin-top:5%;
+}
+
+#photoBox{
+    border: 1px solid #fff;
+    width: 300px;
+    height: 300px;
+    margin: 1%;
+    margin-right: 2%;
+    
+}
+
+.photo-grid {
+    width: 1000px;
+    display: flex;
+    justify-content: right;
+    flex-wrap: wrap;
+}
