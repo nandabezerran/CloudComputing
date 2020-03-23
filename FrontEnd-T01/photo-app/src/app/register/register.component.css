@@ -1,0 +1,22 @@
+.register-form{
+    margin: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+#title{
+    margin: 10%;
+    text-align: center;
+}
+
+.form-card{
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+button{
+    width: 100%;
+}
