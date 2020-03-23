@@ -1,30 +1,35 @@
 <div class="register-form">
 
     <mat-card class="form-card">
-        <mat-card-title id ="title">Registro</mat-card-title>
+      <mat-card-title id ="title">Registro</mat-card-title>
       <mat-card-content class="user-info">
         <form class="example-form">
             <div class="form-group">         
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput placeholder="Full name" >
                 </mat-form-field>
             </div>
             <div class="form-group">         
-                <mat-form-field class="example-full-width">
-                    <input id = "r" matInput placeholder="Email" >
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Email" >
                 </mat-form-field>
             </div>
             <div class="form-group">         
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput placeholder="Username" >
                 </mat-form-field>
             </div>
             <div class="form-group">         
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput placeholder="Password">
                 </mat-form-field>
-            </div>
-        </form>
+            </div>                     
+        </form>        
+        <div class="row">
+            <label id ="labelImg" >Choose your profile photo:</label>
+            <br>
+            <input ng2FileSelect  ng-model="fileLegal" ng-file-select type="file" id="inputPhoto" name="file">
+        </div>          
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary">Cadastro</button>

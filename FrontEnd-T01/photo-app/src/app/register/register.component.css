@@ -1,5 +1,5 @@
 .register-form{
-    margin: 5%;
+    margin: 3.5%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,13 +10,23 @@
     text-align: center;
 }
 
-.form-card{
-    padding-top: 3%;
-    padding-bottom: 3%;
-    padding-left: 5%;
-    padding-right: 5%;
-}
+
 
 button{
     width: 100%;
 }
+
+.form-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#labelImg{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+
