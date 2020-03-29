@@ -20,6 +20,7 @@ import { PhotoCardComponent } from './feed/photo-card/photo-card.component';
 import { RegisterComponent } from './register/register.component';
 
 import { FormsModule } from '@angular/forms';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 
 
@@ -30,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     FeedComponent,
     ProfileComponent,
     PhotoCardComponent,
-    RegisterComponent
+    RegisterComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,
