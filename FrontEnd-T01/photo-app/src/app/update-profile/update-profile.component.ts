@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import userData from "../data/user.json"
+
 
 export class User {
   public name: string;
@@ -16,6 +18,7 @@ export class User {
 export class UpdateProfileComponent implements OnInit {
 
   model = new User();
+  
 
   constructor() { }
 
@@ -24,6 +27,10 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.model.name = userData.name;
+    this.model.email = userData.email;
+    this.model.password = userData.password;
+    this.model.userName = userData.username;
   }
 
 }
