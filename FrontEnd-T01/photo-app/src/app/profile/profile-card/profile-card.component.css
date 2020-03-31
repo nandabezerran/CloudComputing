@@ -1,0 +1,22 @@
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+    
+  }
+  
+  
+  .mat-card{
+    padding-top: 2px;
+  }
+  
+  .mat-card-image{
+    margin: 0px -16px -7px -16px;
+    height:190px;
+  }
+  
+  
+  .likeButton{
+    padding-left: 1%;
+  }
+  

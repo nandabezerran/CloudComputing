@@ -9,6 +9,7 @@
 
 .header{
     margin-bottom: 3%;
+    float:none;
 }
 
 .content{
@@ -18,7 +19,7 @@
 #photoBox{
     border: 1px solid;
     width: 300px;
-    height: 300px;
+    height: 242px;
     margin: 1%;
     margin-right: 2%;    
 }
@@ -36,6 +37,7 @@
     border-radius: 50%;
     flex-shrink: 0;
     object-fit: cover;
+    float: left;
 }
 
 #userName{
