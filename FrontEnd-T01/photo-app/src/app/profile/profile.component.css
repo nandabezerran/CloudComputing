@@ -5,11 +5,13 @@
     margin-top:3%;
     margin-left: 15%;
     margin-right: 15%;
+    background-color: white;
 }
 
 .header{
     margin-bottom: 3%;
-    float:none;
+    border-bottom: 1px solid gray;
+    padding-bottom: 5%;
 }
 
 .content{
@@ -19,7 +21,7 @@
 #photoBox{
     border: 1px solid;
     width: 300px;
-    height: 242px;
+    height: 241px;
     margin: 1%;
     margin-right: 2%;    
 }
@@ -29,6 +31,7 @@
     justify-content: right;
     flex-wrap: wrap;
     float: none;
+    margin-left: 2.5%;
 }
 
 .avatarImg{
@@ -43,5 +46,6 @@
 #userName{
     display: flex;
     justify-content: center; 
+    color: gray;
 }
 
