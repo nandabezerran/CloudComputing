@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import feedMock from '../data/feed.json';
+
 
 @Component({
   selector: 'app-profile',
@@ -8,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class ProfileComponent implements OnInit {
 
   constructor() { }
+  entries: any[];
+
 
   ngOnInit(): void {
+    this.entries = feedMock.entries;
   }
-
 }

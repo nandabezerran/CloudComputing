@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    justify-content: center; 
+    flex-direction: row;
+    margin-top:3%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.header{
+    margin-bottom: 3%;
+}
+
+.content{
+    margin-top: 5%;
+}
+
+#photoBox{
+    border: 1px solid;
+    width: 300px;
+    height: 300px;
+    margin: 1%;
+    margin-right: 2%;    
+}
+
+.photo-grid {
+    display: flex;
+    justify-content: right;
+    flex-wrap: wrap;
+    float: none;
+}
+
+.avatarImg{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+#userName{
+    display: flex;
+    justify-content: center; 
+}
+

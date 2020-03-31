@@ -7,8 +7,8 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 
 
 const routes: Routes = [
-  {path:'', component:UpdateProfileComponent},
-  {path:'profile', component:RegisterComponent}
+  {path:'', component:ProfileComponent},
+  {path:'profile', component:FeedComponent}
 ];
 
 @NgModule({

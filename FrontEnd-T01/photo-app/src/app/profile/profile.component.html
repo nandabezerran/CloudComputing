@@ -1,1 +1,12 @@
-<p>profile works!</p>
+<mat-card class="container">
+    <div class="content">
+        <div class="header">
+            <mat-icon><img class='avatarImg' src="assets/img/avatar.png"></mat-icon> 
+            <div id="userName"><h1>User</h1></div>
+        </div>
+        <mat-card-content class="photo-grid">
+            <app-photo-card id="photoBox" *ngFor="let entry of entries" [data]="entry">    
+            </app-photo-card>
+        </mat-card-content>  
+    </div>  
+</mat-card>
