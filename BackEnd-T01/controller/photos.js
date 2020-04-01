@@ -26,7 +26,8 @@ module.exports.addPhoto = function(req, res){
 module.exports.likeDislikePhoto = function(req, res){
     Photo.findOne({_id: req.body._id})
     .then(photo => {
-        var liked = !!photo.likes.find(x => x === req.body.userid);
+        var liked = !!photo.likes.find(x => (x === req.body.userid));
+        
         if(liked){
             const index = photo.likes.indexOf(req.body.userid);
             photo.likes.splice(index,1);
@@ -35,9 +36,10 @@ module.exports.likeDislikePhoto = function(req, res){
         else{
             photo.likes.push(req.body.userid);
             liked = true;
+            
         }
-
-        var resJson = {_id:photo._id, user: photo.username, data: photo.data, likes: photo.likes.length, youLiked: liked, postedPhoto: photo.photoUrl};
+        photo.save();
+        var resJson = {_id:photo._id, user: photo.username, date: photo.date, likes: photo.likes.length, youLiked: liked, postedPhoto: photo.photoUrl};
         res.send(resJson);
     })
     .catch(err => console.log(err));
