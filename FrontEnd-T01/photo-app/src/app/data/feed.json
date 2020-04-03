@@ -7,7 +7,7 @@
             "likes": 45,
             "youLiked": true,
             "userAvatar": "assets/img/arina1.jpg",
-            "postedPhoto": "assets/img/arina2.jpg" 
+            "postedPhoto": "s3://cc-photo-app-images/61880442_314518096112803_2809521400337924096_o.jpg" 
         },
         {
             "user": "pedronunes",
