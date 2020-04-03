@@ -6,10 +6,10 @@ const Schema = mongoose.Schema;
 
 const PhotoSchema = new Schema(
     {
-        username: {type: String, required: true},
+        userId: {type: String, required: true},
         date: {type: Date, required: true, default: Date.now },
-        likes: [{type: String, required: true}],
-        photoUrl: {type: String, required: true}
+        likes: {type: [String], required:true, default: " "},
+        photoUrl: String
     }
 );
 
