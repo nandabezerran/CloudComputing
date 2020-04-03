@@ -1,0 +1,60 @@
+<div class="register-form">
+
+    <mat-card class="form-card">
+      <mat-card-title id ="title">Photo App</mat-card-title>
+      <mat-card-content class="user-info">
+        <form class="example-form" #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)" >
+            <div class="form-group">         
+                <mat-form-field class="full-width" hideRequiredMarker>
+                    <input type="text" name="name" class="form-control" matInput placeholder="Full name" [(ngModel)]="model.name" required 
+                    [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" minlength="3" #name="ngModel">
+                     <mat-error *ngIf="userForm.submitted && name.invalid" class="invalid-feedback">
+                        <div *ngIf="name.errors.required">Name is required</div>
+                        <div *ngIf="name.errors.minlength">Name should be at least 3 characters long</div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group">         
+                <mat-form-field class="full-width" hideRequiredMarker>
+                    <input type="email" class="form-control" matInput placeholder="Email" name="email" [(ngModel)]="model.email" email required
+                    [ngClass]="{ 'is-invalid': userForm.submitted && email.invalid }" #email="ngModel">
+                     <mat-error *ngIf="userForm.submitted && email.invalid" class="invalid-feedback">
+                        <div *ngIf="email.errors.required">Email is required</div>
+                        <div *ngIf="email.errors.email">Must be a valid email address</div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group">         
+                <mat-form-field class="full-width" hideRequiredMarker>
+                    <input type="text" class="form-control" matInput placeholder="Username" name="userName" [(ngModel)]="model.userName" required
+                    [ngClass]="{ 'is-invalid': userForm.submitted && userName.invalid }" minlength="3" #userName="ngModel">
+                    <mat-error *ngIf="userForm.submitted && userName.invalid" class="invalid-feedback">
+                        <div *ngIf="userName.errors.required">Username is required</div>
+                        <div *ngIf="userName.errors.minlength">Username should be at least 3 characters long</div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group">         
+                <mat-form-field class="full-width" hideRequiredMarker>
+                    <input type="password" class="form-control" matInput placeholder="Password" name="password" [(ngModel)]="model.password" required
+                    [ngClass]="{ 'is-invalid': userForm.submitted && password.invalid }" minlength="8" #password="ngModel">
+                    <mat-error *ngIf="userForm.submitted && password.invalid" class="invalid-feedback">
+                        <div *ngIf="password.errors.required">Password is required</div>
+                        <div *ngIf="password.errors.minlength">Password should be at least 8 characters long</div>
+                    </mat-error>
+                </mat-form-field>
+            </div> 
+            <div class="row">
+                <label id ="labelImg" >Choose your profile photo:</label>
+                <br>
+                <input ng2FileSelect  ng-model="fileLegal" ng-file-select type="file" id="inputPhoto" name="file" [(ngModel)]="model.profilePhoto" required name="profilePhoto"
+                [ngClass]="{ 'is-invalid': userForm.submitted && profilePhoto.invalid }" #profilePhoto="ngModel">
+                <mat-error *ngIf="userForm.submitted && profilePhoto.invalid" class="invalid-feedback">
+                    <div *ngIf="profilePhoto.errors.required">Profile photo is required</div>
+                </mat-error>
+            </div>
+            
+            <button type="submit" mat-raised-button color="primary">Register</button>
+        </form>                      
+      </mat-card-content>     
+    </mat-card>

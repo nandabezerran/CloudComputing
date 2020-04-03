@@ -17,6 +17,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeedComponent } from './feed/feed.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PhotoCardComponent } from './feed/photo-card/photo-card.component';
+import { RegisterComponent } from './register/register.component';
+
+import { FormsModule } from '@angular/forms';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { ProfileCardComponent } from './profile/profile-card/profile-card.component';
+
 
 
 @NgModule({
@@ -25,7 +31,10 @@ import { PhotoCardComponent } from './feed/photo-card/photo-card.component';
     TopBarComponent,
     FeedComponent,
     ProfileComponent,
-    PhotoCardComponent
+    PhotoCardComponent,
+    RegisterComponent,
+    UpdateProfileComponent,
+    ProfileCardComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,8 @@ import { PhotoCardComponent } from './feed/photo-card/photo-card.component';
     MatIconModule,
     MatCardModule,
     MatTooltipModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
