@@ -1,0 +1,12 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image" [style.backgroundImage]="'url('+entries[1].userAvatar+')'"></div>
+      <mat-card-title class="username">{{entries[1].user}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{entries[1].postedPhoto}}" alt="'Photo of'+data[1].user">
+
+    <mat-card-actions>
+      <button mat-button class="likeButton"(click)='likePhoto()'> <mat-icon>favorite{{entries[0].youLiked ? '' : '_border'}}</mat-icon>  {{entries[0].likes}}</button>    
+    </mat-card-actions>
+  </mat-card>
+

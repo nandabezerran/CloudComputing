@@ -4,10 +4,14 @@ import { FeedComponent } from './feed/feed.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import {LogInComponent} from './log-in/log-in.component';
+import {IdvCardComponent} from './idv-card/idv-card.component';
+
+
 
 
 const routes: Routes = [
-  {path:'', component:ProfileComponent},
+  {path:'', component:IdvCardComponent},
   {path:'profile', component:FeedComponent}
 ];
 

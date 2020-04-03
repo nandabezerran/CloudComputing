@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "photo-app"
+  "defaultProject": "photo-app",
+  "cli": {
+    "analytics": "7055d705-10c7-48a2-bde3-86132f321246"
+  }
 }

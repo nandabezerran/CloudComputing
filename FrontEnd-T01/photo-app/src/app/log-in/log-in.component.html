@@ -1,0 +1,33 @@
+<div class="login-form">
+
+    <mat-card class="form-card">
+      <mat-card-title id ="title">Photo App</mat-card-title>
+      <mat-card-content class="user-info">
+        <form class="example-form" #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)" >
+            <div class="form-group">         
+                <mat-form-field class="full-width" hideRequiredMarker>
+                    <input type="text" class="form-control" matInput placeholder="Username" name="userName" [(ngModel)]="model.userName" required
+                    [ngClass]="{ 'is-invalid': userForm.submitted && userName.invalid }" minlength="3" #userName="ngModel">
+                    <mat-error *ngIf="userForm.submitted && userName.invalid" class="invalid-feedback">
+                        <div *ngIf="userName.errors.required">Username is required</div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group">         
+                <mat-form-field class="full-width" hideRequiredMarker>
+                    <input type="password" class="form-control" matInput placeholder="Password" name="password" [(ngModel)]="model.password" required
+                    [ngClass]="{ 'is-invalid': userForm.submitted && password.invalid }" minlength="8" #password="ngModel">
+                    <mat-error *ngIf="userForm.submitted && password.invalid" class="invalid-feedback">
+                        <div *ngIf="password.errors.required">Password is required</div>
+                    </mat-error>
+                </mat-form-field>
+            </div> 
+            
+            <button type="submit" mat-raised-button color="primary">Login</button>
+            
+
+        </form>   
+        <p class="textRegister"> Ainda não é cadastrado? Clique no botão abaixo para se registrar.</p>
+        <button mat-raised-button color="primary"(click)='redirectRegister()'>Register</button>                   
+      </mat-card-content>     
+    </mat-card>

@@ -22,6 +22,8 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { ProfileCardComponent } from './profile/profile-card/profile-card.component';
+import { LogInComponent } from './log-in/log-in.component';
+import { IdvCardComponent } from './idv-card/idv-card.component';
 
 
 
@@ -34,7 +36,9 @@ import { ProfileCardComponent } from './profile/profile-card/profile-card.compon
     PhotoCardComponent,
     RegisterComponent,
     UpdateProfileComponent,
-    ProfileCardComponent
+    ProfileCardComponent,
+    LogInComponent,
+    IdvCardComponent
   ],
   imports: [
     BrowserModule,
