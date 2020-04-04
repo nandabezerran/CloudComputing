@@ -22,8 +22,8 @@ export class PhotoCardComponent implements OnInit {
     else{
       this.data.likes--;
     }
-    // TODO: set the correct userID
-    this.feedService.likeDislikePhoto(this.data._id, '5e876e972d9afc2b586be490').subscribe();
+
+    this.feedService.likeDislikePhoto(this.data._id).subscribe();
   }
   
 }

@@ -16,7 +16,8 @@
       "dom"
     ],
     "resolveJsonModule": true,
-    "esModuleInterop": true 
+    "esModuleInterop": true,
+    "allowJs": true 
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

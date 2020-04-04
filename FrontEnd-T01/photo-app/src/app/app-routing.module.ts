@@ -12,12 +12,13 @@ import { IdvCardComponent } from './idv-card/idv-card.component';
 
 
 const routes: Routes = [
-  {path:'', component:FeedComponent},
+  {path:'', component:LogInComponent},
   {path:'profile', component:ProfileComponent},
   {path: 'profile/:term', component:ProfileComponent},
   {path:'updateUser', component:UpdateProfileComponent},
   {path:'login', component:LogInComponent},
-  {path:'register', component:RegisterComponent}
+  {path:'register', component:RegisterComponent},
+  {path:'feed', component:FeedComponent},
 ];
 
 @NgModule({

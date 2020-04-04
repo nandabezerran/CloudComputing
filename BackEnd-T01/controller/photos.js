@@ -10,12 +10,12 @@ module.exports.photosPerTime = function(req,res){
     .then(photos => {
         var resJson = photos.map(function(photo) {
         // TODO youLiked user da sessao
-            console.log(photo);
-            return{_id:photo._id, userId: photo.userId._id, username: photo.userId.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === '5e876e972d9afc2b586be490')), postedPhoto: photo.photoUrl, userAvatar: photo.userId.profilePicture}
+            return{_id:photo._id, userId: photo.userId._id, username: photo.userId.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photoUrl, userAvatar: photo.userId.profilePicture}
         });
         res.send(resJson);
     });
 }
+
 module.exports.userPhotos = function(req, res){
     User.findOne({username: req.params.username})
     .then(user => {
@@ -23,7 +23,7 @@ module.exports.userPhotos = function(req, res){
         .then(photos => {  
             var resJson = photos.map(function(photo) {
                 // TODO youLiked user da sessao
-                return{_id:photo._id, userId: photo.userId, username: user.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === user._id.toString())), postedPhoto: photo.photoUrl, userAvatar: user.profilePicture}
+                return{_id:photo._id, userId: photo.userId, username: user.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photoUrl, userAvatar: user.profilePicture}
             })
             res.send(resJson);        
         })

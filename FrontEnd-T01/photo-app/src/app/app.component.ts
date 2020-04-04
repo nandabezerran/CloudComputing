@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'photo-app';
+  isLogged(){
+    console.log(sessionStorage.getItem("id"));
+    return !!sessionStorage.getItem("id");
+  }
 }

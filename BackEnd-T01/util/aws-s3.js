@@ -18,7 +18,9 @@ module.exports.uploadFileS3 = (fileName, file) => {
     const params = {
       Bucket: BUCKET_NAME,
       Key: fileName, // File name you want to save as in S3
-      Body: fs.createReadStream(file)
+      Body: fs.createReadStream(file),
+      ACL: 'public-read'
+
     };
     
     s3.upload(params, function(err, data) {

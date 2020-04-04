@@ -11,13 +11,13 @@ export class FeedService {
   constructor(private http:HttpClient) {}
 
   getFeedPhotos() : Observable<FeedCard[]>{
-    return this.http.get<FeedCard[]>('/api/photos');
+    return this.http.get<FeedCard[]>('/api/photos/'+sessionStorage.getItem("id"));
   }
   getUserPhotos(username: string) : Observable<FeedCard[]> {
-    return this.http.get<FeedCard[]>('/api/photos/'+username);
+    return this.http.get<FeedCard[]>('/api/photos/'+username+'/'+sessionStorage.getItem("id"));
   }
 
-  likeDislikePhoto(photoId: string, userId: string) : Observable<void> {
-    return this.http.put<void>('/api/photos/like', {_id: photoId, userId});
+  likeDislikePhoto(photoId: string) : Observable<void> {
+    return this.http.put<void>('/api/photos/like', {_id: photoId, userId: sessionStorage.getItem("id")});
   }
 }

@@ -3,6 +3,19 @@ const path = require('path');
 const fs = require('fs');
 const AWS_S3 = require("../util/aws-s3.js");
 
+module.exports.findUserById = function(req, res){
+    User.findOne({_id: req.params.id_session})
+    .then(user => {
+        console.log(user);
+        res.status(200).send(user);
+        
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(404).send("User not found");
+    });
+}
+
 module.exports.findUser = function(req, res){
     User.find({username: req.params.username})
     .then(user => {
@@ -81,11 +94,10 @@ module.exports.updateUser = function(req, res){
 }
 
 module.exports.loginUser = function(req, res){
-    console.log(req.body);
-    User.find({username: req.body.username})
+    User.findOne({username: req.body.username})
     .then(user => {
-        if(user[0].password == req.body.password){
-            res.status(200).send(user[0]._id);
+        if(user.password.toString() === req.body.password.toString()){
+            res.status(200).send(user._id);
         }
         else{
             res.status(500).send("Senha incorreta"); 

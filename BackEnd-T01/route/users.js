@@ -10,7 +10,8 @@ const storage = multer.diskStorage({
 });
 const parser = multer({ storage: storage });
 module.exports = function(app){
-    app.get("/api/users/:username", controller.findUser);
+    app.get("/api/users/:id_session/", controller.findUserById);
+    app.get("/api/users/:username/", controller.findUser);
     app.post("/api/users",parser.single('profilePicture'), controller.addUser);
     app.put("/api/users", controller.updateUser);
     app.post("/api/users/login", controller.loginUser);

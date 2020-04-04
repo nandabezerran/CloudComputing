@@ -30,15 +30,18 @@ export class LogInComponent implements OnInit {
   onSubmit(form) {
 
     this.userLogin = { username : form.value.userName, password : form.value.password };
-
-    this.http.post('http://localhost:3000/api/users/login', this.userLogin)
+    console.log(this.userLogin);
+    this.http.post('/api/users/login', this.userLogin)
       .subscribe(Response=> {
-        console.log(Response.toString())
+        
         sessionStorage.setItem("id", Response.toString());
+        this.router.navigate(['feed']);
+      
       },
       (error: any) => {
           console.log(error);
       });
+      
     }
 
   ngOnInit(): void {
@@ -46,9 +49,6 @@ export class LogInComponent implements OnInit {
 
   redirectRegister(): void{
     this.router.navigate(['register']);
-  }
-  redirectFeed():void{
-    this.router.navigate(['']);
   }
 
 }
