@@ -10,10 +10,13 @@ export class IdvCardComponent implements OnInit {
 
   @Input() data: any;
   entries: any[];
+  user_id = ""
+
   constructor() { }
 
   ngOnInit(): void { 
     this.entries = feedMock.entries;
+    this.user_id = sessionStorage.getItem("id")
   }
 
   likePhoto(): void{

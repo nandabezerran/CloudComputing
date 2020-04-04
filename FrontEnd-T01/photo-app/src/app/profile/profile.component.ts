@@ -13,10 +13,12 @@ export class ProfileComponent implements OnInit {
   entries: any[];
   userName: any;
   userAvatar: any;
+  user_id = ""
 
   ngOnInit(): void {
     this.entries = feedMock.entries;
     this.userName = this.entries[0].user;
     this.userAvatar = this.entries[0].userAvatar;
+    this.user_id = sessionStorage.getItem("id")
   }
 }

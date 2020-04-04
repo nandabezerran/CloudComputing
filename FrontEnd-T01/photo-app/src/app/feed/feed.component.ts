@@ -9,10 +9,12 @@ import feedMock from '../data/feed.json';
 export class FeedComponent implements OnInit {
 
   entries: any[];
+  user_id = ""
   constructor() { }
 
   ngOnInit(): void {
     this.entries = feedMock.entries;
+    this.user_id = sessionStorage.getItem("id")
   }
 
 }
