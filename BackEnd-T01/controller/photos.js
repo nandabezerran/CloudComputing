@@ -3,14 +3,27 @@ const User = require("../models/user.js");
 const path = require('path');
 const fs = require('fs');
 const AWS_S3 = require("../util/aws-s3.js");
- 
+
+module.exports.photosPerTime = function(req,res){
+    Photo.find().populate('userId')
+    .exec()
+    .then(photos => {
+        var resJson = photos.map(function(photo) {
+        // TODO youLiked user da sessao
+            console.log(photo);
+            return{_id:photo._id, userId: photo.userId._id, username: photo.userId.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === '5e876e972d9afc2b586be490')), postedPhoto: photo.photoUrl, userAvatar: photo.userId.profilePicture}
+        });
+        res.send(resJson);
+    });
+}
 module.exports.userPhotos = function(req, res){
     User.findOne({username: req.params.username})
     .then(user => {
         Photo.find({userId: user._id})
         .then(photos => {  
             var resJson = photos.map(function(photo) {
-                return{_id:photo._id, user: photo.userId, username: user.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(user => (user === req.body.token)), postedPhoto: photo.photoUrl, userAvatar: user.profilePicture}
+                // TODO youLiked user da sessao
+                return{_id:photo._id, userId: photo.userId, username: user.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === user._id.toString())), postedPhoto: photo.photoUrl, userAvatar: user.profilePicture}
             })
             res.send(resJson);        
         })
@@ -68,14 +81,7 @@ module.exports.addPhoto = function(req, res){
 module.exports.likeDislikePhoto = function(req, res){
     Photo.findOne({_id: req.body._id})
     .then(photo => {
-        var liked;
-        if(photo.likes){
-            liked = !!photo.likes.find(x => (x === req.body.userId));
-        }
-
-        else{
-            liked = false;
-        }
+        var liked = photo.likes ? !!photo.likes.find(x => (x === req.body.userId)) : false;
         
         if(liked){
             const index = photo.likes.indexOf(req.body.userId);
@@ -87,14 +93,9 @@ module.exports.likeDislikePhoto = function(req, res){
             liked = true;
             
         }
-        photo.save();
-        User.findOne({_id: photo.userId})
-        .then(user => {
-            var resJson = {_id:photo._id, user: photo.username, date: photo.date, likes: photo.likes.length-1, youLiked: liked, postedPhoto: photo.photoUrl, userAvatar: user.profilePicture};
-            res.send(resJson);
-        })
-        
-        
+        photo.save()
+        .then(res.status(200).send());
+             
     })
     .catch(err => console.log(err));
 }

@@ -14,8 +14,8 @@
             <img class='avatarImg' src="assets/img/avatar.png"></button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)='redirectProfile()'>Show profile</button>
-            <button mat-menu-item>Edit info</button>
-            <button mat-menu-item>Logout</button>
+            <button mat-menu-item (click)='redirectUpdate()'>Edit info</button>
+            <button mat-menu-item (click)='redirectLogin()'>Logout</button>
         </mat-menu>
     </span>
 

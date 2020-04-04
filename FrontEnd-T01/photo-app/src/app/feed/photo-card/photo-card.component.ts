@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FeedService } from 'src/app/services/feed.service';
+import { FeedCard } from 'src/app/interfaces/feedCard';
 
 @Component({
   selector: 'app-photo-card',
@@ -6,8 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./photo-card.component.css']
 })
 export class PhotoCardComponent implements OnInit {
-  @Input() data: any;
-  constructor() { }
+  @Input() data: FeedCard;
+  constructor(private feedService: FeedService) { }
 
   ngOnInit(): void {
   }
@@ -20,5 +22,8 @@ export class PhotoCardComponent implements OnInit {
     else{
       this.data.likes--;
     }
+    // TODO: set the correct userID
+    this.feedService.likeDislikePhoto(this.data._id, '5e876e972d9afc2b586be490').subscribe();
   }
+  
 }

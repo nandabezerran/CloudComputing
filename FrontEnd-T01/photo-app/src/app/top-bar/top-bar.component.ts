@@ -17,6 +17,13 @@ export class TopBarComponent implements OnInit {
     this.router.navigate(['profile']);
   }
 
+  redirectUpdate(): void{
+    this.router.navigate(['updateUser']);
+  }
+  redirectLogin(): void{
+    this.router.navigate(['login']);
+  }
+
   redirectFeed(): void{
     this.router.navigate(['']);
   }

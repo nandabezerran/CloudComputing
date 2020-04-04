@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import feedMock from '../data/feed.json';
+import { FeedService } from '../services/feed.service';
+import { FeedCard } from '../interfaces/feedCard';
 
 @Component({
   selector: 'app-feed',
@@ -8,11 +10,13 @@ import feedMock from '../data/feed.json';
 })
 export class FeedComponent implements OnInit {
 
-  entries: any[];
-  constructor() { }
+  entries: FeedCard[];
+  constructor(private feedService: FeedService) { }
 
   ngOnInit(): void {
-    this.entries = feedMock.entries;
+    this.feedService.getFeedPhotos().subscribe(photoCards => {
+      this.entries = photoCards;
+    });
   }
 
 }
