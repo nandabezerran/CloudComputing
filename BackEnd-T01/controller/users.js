@@ -84,9 +84,8 @@ module.exports.loginUser = function(req, res){
     console.log(req.body);
     User.find({username: req.body.username})
     .then(user => {
-        
-        if(user.password == req.body.password){
-            res.status(200).send("Logado");
+        if(user[0].password == req.body.password){
+            res.status(200).send(user[0]._id);
         }
         else{
             res.status(500).send("Senha incorreta"); 

@@ -11,12 +11,16 @@ import { FeedCard } from '../interfaces/feedCard';
 export class FeedComponent implements OnInit {
 
   entries: FeedCard[];
+  
+
+  user_id = ""
   constructor(private feedService: FeedService) { }
 
   ngOnInit(): void {
     this.feedService.getFeedPhotos().subscribe(photoCards => {
       this.entries = photoCards;
     });
+    this.user_id = sessionStorage.getItem("id")
   }
 
 }

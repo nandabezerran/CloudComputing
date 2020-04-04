@@ -18,7 +18,8 @@ export class User {
 export class UpdateProfileComponent implements OnInit {
 
   model = new User();
-  
+  user_id = ""
+ 
 
   constructor() { }
 
@@ -31,6 +32,7 @@ export class UpdateProfileComponent implements OnInit {
     this.model.email = userData.email;
     this.model.password = userData.password;
     this.model.userName = userData.username;
+    this.user_id = sessionStorage.getItem("id")
   }
 
 }
