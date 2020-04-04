@@ -25,10 +25,6 @@ import { LogInComponent } from './log-in/log-in.component';
 import { IdvCardComponent } from './idv-card/idv-card.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { HttpClientModule } from '@angular/common/http';
-
-
-
 
 @NgModule({
   declarations: [
