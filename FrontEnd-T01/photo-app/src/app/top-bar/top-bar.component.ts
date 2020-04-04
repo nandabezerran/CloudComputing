@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FeedService } from '../services/feed.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -8,13 +9,14 @@ import { Router } from '@angular/router';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,private feedService: FeedService) { }
 
   ngOnInit(): void {
   }
 
   redirectProfile(): void{
-    this.router.navigate(['profile']);
+    // TODO user from session
+    this.router.navigate(['profile', 'nandabezerran']);
   }
 
   redirectUpdate(): void{
@@ -26,5 +28,9 @@ export class TopBarComponent implements OnInit {
 
   redirectFeed(): void{
     this.router.navigate(['']);
+  }
+
+  searchUser(username: string): void{
+    this.router.navigate(['profile', username]);
   }
 }

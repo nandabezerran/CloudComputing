@@ -32,6 +32,8 @@ export class LogInComponent implements OnInit {
   redirectRegister(): void{
     this.router.navigate(['register']);
   }
-
+  redirectFeed():void{
+    this.router.navigate(['']);
+  }
 
 }

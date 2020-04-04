@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import feedMock from '../data/feed.json';
-
+import { FeedService } from '../services/feed.service';
+import { FeedCard } from '../interfaces/feedCard';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -9,14 +11,19 @@ import feedMock from '../data/feed.json';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
-  entries: any[];
+  constructor(private feedService: FeedService, private route: ActivatedRoute) { }
+  entries: FeedCard[];
   userName: any;
   userAvatar: any;
 
   ngOnInit(): void {
-    this.entries = feedMock.entries;
-    this.userName = this.entries[0].user;
-    this.userAvatar = this.entries[0].userAvatar;
+    this.route.params.subscribe(params => {
+      this.feedService.getUserPhotos(params.term).subscribe(photoCards => {
+        console.log(photoCards);
+        this.entries = photoCards;
+        this.userName = this.entries[0].username;
+        this.userAvatar = this.entries[0].userAvatar;
+      });    
+    });
   }
 }

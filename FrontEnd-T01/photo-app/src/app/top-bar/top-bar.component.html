@@ -4,9 +4,9 @@
     <div id="searchBox">
         
         <mat-form-field>
-            <input matInput>
+            <input #box matInput>
         </mat-form-field>
-        <mat-icon id="searchIcon">search</mat-icon>   
+        <mat-icon id="searchIcon" (click)='searchUser(box.value)'>search</mat-icon>   
     </div>
     
     <span id="pictureMenu">

@@ -9,7 +9,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -39,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     UpdateProfileComponent,
     ProfileCardComponent,
     LogInComponent,
-    IdvCardComponent
+    IdvCardComponent,
+  
   ],
   imports: [
     BrowserModule,
