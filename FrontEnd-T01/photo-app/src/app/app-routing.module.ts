@@ -11,7 +11,7 @@ import {IdvCardComponent} from './idv-card/idv-card.component';
 
 
 const routes: Routes = [
-  {path:'', component:IdvCardComponent},
+  {path:'', component:LogInComponent},
   {path:'profile', component:FeedComponent}
 ];
 

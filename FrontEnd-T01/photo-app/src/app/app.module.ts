@@ -25,6 +25,9 @@ import { ProfileCardComponent } from './profile/profile-card/profile-card.compon
 import { LogInComponent } from './log-in/log-in.component';
 import { IdvCardComponent } from './idv-card/idv-card.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 
 @NgModule({
@@ -51,7 +54,8 @@ import { IdvCardComponent } from './idv-card/idv-card.component';
     MatCardModule,
     MatTooltipModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

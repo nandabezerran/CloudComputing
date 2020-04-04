@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { stringify } from 'querystring';
+
 
 
 export class User {
@@ -19,12 +22,25 @@ export class LogInComponent implements OnInit {
   
 
   model = new User();
+  userLogin = {};
+  id = ""
 
-  constructor(private router:Router) { }
+
+  constructor(private router:Router, private http : HttpClient) { }
 
   onSubmit(form) {
-    console.log(form.value)
-  }
+
+    this.userLogin = { username : form.value.userName, password : form.value.password };
+
+    this.http.post('http://localhost:3000/api/users/login', this.userLogin)
+      .subscribe(Response=> {
+        console.log(Response.toString())
+        sessionStorage.setItem("id", Response.toString());
+      },
+      (error: any) => {
+          console.log(error);
+      });
+    }
 
   ngOnInit(): void {
   }
