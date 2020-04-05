@@ -59,6 +59,7 @@ module.exports.addUser = function(req, res){
             user
             .save()
             .then(newUser => {
+                console.log(req.body)
                 const new_filename = newUser._id+"/profilePic/"+ req.file.originalname;
                 AWS_S3.uploadFileS3(new_filename, req.file.path)
                 .then((aws_s3_file ) => {
@@ -66,8 +67,7 @@ module.exports.addUser = function(req, res){
                     .then(old_photo => {
                         deleteFile(req.file.destination, req.file.originalname)
                         .then(()=>{
-                            res.send(old_photo);   
-                            
+                            res.status(200).send(newUser._id);
                         })                    
                     })
                 })

@@ -3,6 +3,7 @@ import { FeedService } from '../services/feed.service';
 import { FeedCard } from '../interfaces/feedCard';
 import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private feedService: FeedService, private route: ActivatedRoute) { }
+  constructor(private feedService: FeedService, private route: ActivatedRoute, private userService: UserService) { }
   entries: FeedCard[];
   userName: any;
   userAvatar: any;
@@ -21,8 +22,17 @@ export class ProfileComponent implements OnInit {
       this.feedService.getUserPhotos(params.term).subscribe(photoCards => {
         console.log(photoCards);
         this.entries = photoCards;
-        this.userName = this.entries[0].username;
-        this.userAvatar = this.entries[0].userAvatar;
+        if(this.entries.length == 0 ){
+          this.userService.getUser().subscribe(user => {
+            this.userName = user.username;
+            this.userAvatar = user.profilePicture;
+          })
+        }
+        else{
+          this.userName = this.entries[0].username;
+          this.userAvatar = this.entries[0].userAvatar;
+        }
+        
       });    
     });
   }
