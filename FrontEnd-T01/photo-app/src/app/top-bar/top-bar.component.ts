@@ -16,7 +16,6 @@ export class TopBarComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUser().subscribe(aux => {
       this.user = aux;
-      console.log(this.user.profilePicture)
     });
   }
   

@@ -21,4 +21,8 @@ export class ImageService {
   public uploadUser(formData: FormData): Observable<String> {
     return this.http.post<String>('api/users/', formData);
   }
+
+  public editUser(formData: FormData): Observable<String>{
+    return this.http.put<String>('api/users', formData);
+  }
 }

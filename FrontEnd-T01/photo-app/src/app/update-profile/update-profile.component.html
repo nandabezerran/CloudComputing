@@ -26,16 +26,6 @@
             </div>
             <div class="form-group">         
                 <mat-form-field class="full-width" hideRequiredMarker>
-                    <input type="text" class="form-control" matInput placeholder="Username" name="userName" [(ngModel)]="model.userName" required
-                    [ngClass]="{ 'is-invalid': userForm.submitted && userName.invalid }" minlength="3" #userName="ngModel">
-                    <mat-error *ngIf="userForm.submitted && userName.invalid" class="invalid-feedback">
-                        <div *ngIf="userName.errors.required">Username is required</div>
-                        <div *ngIf="userName.errors.minlength">Username should be at least 3 characters long</div>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="form-group">         
-                <mat-form-field class="full-width" hideRequiredMarker>
                     <input type="password" class="form-control" matInput placeholder="Password" name="password" [(ngModel)]="model.password" required
                     [ngClass]="{ 'is-invalid': userForm.submitted && password.invalid }" minlength="8" #password="ngModel">
                     <mat-error *ngIf="userForm.submitted && password.invalid" class="invalid-feedback">
@@ -47,11 +37,7 @@
             <div class="row">
                 <label id ="labelImg" >Choose your profile photo:</label>
                 <br>
-                <input ng2FileSelect  ng-model="fileLegal" ng-file-select type="file" id="inputPhoto" name="file" [(ngModel)]="model.profilePhoto" required name="profilePhoto"
-                [ngClass]="{ 'is-invalid': userForm.submitted && profilePhoto.invalid }" #profilePhoto="ngModel">
-                <mat-error *ngIf="userForm.submitted && profilePhoto.invalid" class="invalid-feedback">
-                    <div *ngIf="profilePhoto.errors.required">Profile photo is required</div>
-                </mat-error>
+                <input type="file" #imageInput type="file" accept="image/*" (change)="saveProfilePic(imageInput)" name="imageInput">
             </div>
             
             <button type="submit" mat-raised-button color="primary">Save</button>
