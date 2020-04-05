@@ -67,7 +67,7 @@ module.exports.addUser = function(req, res){
                         deleteFile(req.file.destination, req.file.originalname)
                         .then(()=>{
                             res.send(old_photo);   
-                            console.log(old_photo);
+                            
                         })                    
                     })
                 })

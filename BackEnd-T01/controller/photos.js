@@ -9,7 +9,6 @@ module.exports.photosPerTime = function(req,res){
     .exec()
     .then(photos => {
         var resJson = photos.map(function(photo) {
-        // TODO youLiked user da sessao
             return{_id:photo._id, userId: photo.userId._id, username: photo.userId.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photoUrl, userAvatar: photo.userId.profilePicture}
         });
         res.send(resJson);
@@ -66,15 +65,14 @@ module.exports.addPhoto = function(req, res){
             .then(old_photo => {
                 deleteFile(req.file.destination, req.file.originalname)
                 .then(()=>{
-                    res.send(old_photo);   
-                    console.log(old_photo);
+                    res.send();   
                 })                    
             })
         })
     })
         
     .catch(_err => {
-        res.status(405).send(_err);
+        res.status(405).send('blabalada');
     }) 
 }
 

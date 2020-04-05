@@ -14,7 +14,7 @@ const params = {
 
 module.exports.uploadFileS3 = (fileName, file) => {
   return new Promise((resolve, reject) => {
-    console.log(file);        // Setting up S3 upload parameters
+      // Setting up S3 upload parameters
     const params = {
       Bucket: BUCKET_NAME,
       Key: fileName, // File name you want to save as in S3

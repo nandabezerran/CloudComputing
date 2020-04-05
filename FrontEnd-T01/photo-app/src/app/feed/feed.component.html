@@ -4,4 +4,7 @@
         </app-photo-card>
     </div>
 </div>
-<button mat-fab matTooltip="Add new photo" aria-label="Button that displays a tooltip when focused or hovered over" matTooltipPosition="above"  class="addPhoto" > + </button>
+<button (click)="imageInput.click()" mat-fab matTooltip="Add new photo" aria-label="Button that displays a tooltip when focused or hovered over" matTooltipPosition="above"  class="addPhoto" > + </button>
+<span style="visibility: hidden; position: absolute; overflow: hidden; width: 0px; height:0px;border:none;margin:0; padding:0">
+    <input type="file" #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" />
+</span>
