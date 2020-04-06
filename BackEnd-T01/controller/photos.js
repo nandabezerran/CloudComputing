@@ -97,3 +97,21 @@ module.exports.likeDislikePhoto = function(req, res){
     })
     .catch(err => console.log(err));
 }
+
+module.exports.findPhotoDate = function(req, res){
+    Photo.find({}).populate('userId')
+    .exec()
+    .then(photo => {
+        console.log("olá")
+        let dataI = new Date(req.body.dataInicial);
+        let dataF = new Date(req.body.dataFinal);
+        photo = photo.filter((p) => p.date.getTime() >= dataI.getTime() && p.date.getTime() <= dataF.getTime());
+        var resJson = photo.map(function(photo) {
+            return{_id:photo._id, userId: photo.userId._id, username: photo.userId.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photoUrl, userAvatar: photo.userId.profilePicture}
+        });
+        res.send(resJson);
+        
+             
+    })
+    .catch(err => console.log(err));
+}

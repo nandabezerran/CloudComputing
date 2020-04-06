@@ -3,6 +3,14 @@ import { FeedService } from '../services/feed.service';
 import { FeedCard } from '../interfaces/feedCard';
 import { ImageService } from '../services/image.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
+export class Datas {
+  public dataInicial: Date;
+  public dataFinal: Date;
+}
+
+
 class ImageSnippet {
   constructor(public srcc: string, public file: File) {}
 }
@@ -17,10 +25,13 @@ export class FeedComponent implements OnInit {
 
   entries: FeedCard[];
   selectedFile: ImageSnippet;
+  photoDatas = {};
+  model = new Datas;
+  
   
 
   user_id = ""
-  constructor(private feedService: FeedService, private imageService: ImageService, private router:Router) { }
+  constructor(private feedService: FeedService, private imageService: ImageService, private router:Router, private http : HttpClient) { }
 
   ngOnInit(): void {
 
@@ -28,6 +39,13 @@ export class FeedComponent implements OnInit {
       this.entries = photoCards;
     });
     this.user_id = sessionStorage.getItem("id");
+  }
+
+  onSubmit(form) {
+    this.feedService.getFeedPhotosDate(this.model.dataInicial, this.model.dataFinal).subscribe(photoCards => {
+      this.entries = photoCards;
+    });
+    console.log(this.photoDatas);
   }
 
   processFile(imageInput: any) {

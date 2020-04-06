@@ -8,3 +8,13 @@
 <span style="visibility: hidden; position: absolute; overflow: hidden; width: 0px; height:0px;border:none;margin:0; padding:0">
     <input type="file" #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" />
 </span>
+
+<form class="example-form" #datesForm="ngForm" (ngSubmit)="onSubmit(datesForm)" >
+    <label for="Data Inicial">Data Inicial:</label>
+    <input type="date" class="form-control" matInput name="dataInicial" [(ngModel)]="model.dataInicial" required
+     #dataInicial="ngModel">    
+     <label for="Data Final">Data Final</label>
+    <input type="date" class="form-control" matInput name="dataFinal" [(ngModel)]="model.dataFinal" required
+    #dataFinal="ngModel"> 
+    <button type="submit" mat-raised-button color="primary" (click)= 'onSubmit(datesForm)'>Buscar</button>
+</form>
