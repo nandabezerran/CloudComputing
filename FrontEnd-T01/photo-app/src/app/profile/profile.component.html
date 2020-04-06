@@ -2,7 +2,9 @@
     <div class="content">
         <div class="header">
             <mat-icon><img class='avatarImg' src={{userAvatar}}></mat-icon> 
-            <div id="userName"><h1>{{userName}}</h1></div>
+            <div id="userName">
+                <h2><p>{{userName}}<br>{{name}}</p></h2>
+            </div>
         </div>
         <mat-card-content class="photo-grid">
             <app-profile-card id="photoBox" *ngFor="let entry of entries" [data]="entry">    

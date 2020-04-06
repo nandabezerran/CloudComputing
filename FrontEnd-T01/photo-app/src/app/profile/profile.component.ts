@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   constructor(private feedService: FeedService, private route: ActivatedRoute, private userService: UserService) { }
   entries: FeedCard[];
   userName: any;
+  name:any;
   userAvatar: any;
 
   ngOnInit(): void {
@@ -26,11 +27,16 @@ export class ProfileComponent implements OnInit {
           this.userService.getUser().subscribe(user => {
             this.userName = user.username;
             this.userAvatar = user.profilePicture;
+            this.name = user.name;
           })
         }
         else{
           this.userName = this.entries[0].username;
           this.userAvatar = this.entries[0].userAvatar;
+          this.userService.getUser().subscribe(user => {
+            this.name = user.name;
+          })
+          
         }
         
       });    
