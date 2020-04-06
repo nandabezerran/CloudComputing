@@ -1,3 +1,29 @@
+.example-form{
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #696969;
+    border-radius:10px;
+
+}
+
+.form-control{
+    margin-left: 10%;
+}
+
+.button-search{
+    margin-right:2%;
+    padding: 0px;
+}
+
+.name-dates{
+    margin-left:2%;
+    font-weight: bold;
+}
+
 .container {
     display: flex;
     justify-content: center; 

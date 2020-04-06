@@ -102,7 +102,6 @@ module.exports.findPhotoDate = function(req, res){
     Photo.find({}).populate('userId')
     .exec()
     .then(photo => {
-        console.log("olá")
         let dataI = new Date(req.body.dataInicial);
         let dataF = new Date(req.body.dataFinal);
         photo = photo.filter((p) => p.date.getTime() >= dataI.getTime() && p.date.getTime() <= dataF.getTime());

@@ -49,14 +49,12 @@ function deleteFile(dir, file) {
 };
 
 module.exports.addUser = function(req, res){
-    console.log("entrou!");
     User.exists({username: req.body.username})
     .then(user => {
         if(user.username){
             res.status(500).send("Username already in use");
         }
         else{
-            console.log("entrou no else!");
             const user = new User(req.body);
             user
             .save()
