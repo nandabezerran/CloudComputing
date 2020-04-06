@@ -11,7 +11,7 @@
     
     <span id="pictureMenu">
         <button mat-button [matMenuTriggerFor]="menu">
-            <img class='avatarImg' [src]="user.profilePicture"></button>
+            <img *ngIf="!!user" class='avatarImg' [src]="user.profilePicture"></button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)='redirectProfile()'>Show profile</button>
             <button mat-menu-item (click)='redirectUpdate()'>Edit info</button>

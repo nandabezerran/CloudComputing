@@ -58,6 +58,4 @@ export class RegisterComponent implements OnInit {
 
     reader.readAsDataURL(this.profilePic);
   }
-
-
 }

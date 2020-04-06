@@ -11,10 +11,13 @@ import { UserInter } from '../interfaces/userInter';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor(private router:Router,private feedService: FeedService, private userService: UserService) { }
+  constructor(private router:Router,private feedService: FeedService, public userService: UserService) { }
   user: UserInter; 
   ngOnInit(): void {
     this.userService.getUser().subscribe(aux => {
+      this.user = aux;
+    });
+    this.userService.currentUser.subscribe(aux => {
       this.user = aux;
     });
   }

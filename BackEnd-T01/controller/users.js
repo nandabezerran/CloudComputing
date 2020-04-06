@@ -84,17 +84,19 @@ module.exports.addUser = function(req, res){
 module.exports.updateUser = function(req, res){
     User.findOneAndUpdate({_id:req.body.userId}, {$set:{name:req.body.name, password:req.body.password, email: req.body.email}},{new:true})
     .then(old_aluno => {
-        const new_filename = req.body.userId+"/profilePic/"+ req.file.originalname;
-        AWS_S3.uploadFileS3(new_filename, req.file.path)
-        .then((aws_s3_file) => {
-            User.findByIdAndUpdate(req.body.userId, {$set:{profilePicture:aws_s3_file.Location}},{new:true})
-            .then(old_photo => {
-                deleteFile(req.file.destination, req.file.originalname)
-                .then(()=>{
-                    res.send();
-                })                    
-            })
-        })        
+        if(req.file!=undefined){
+            const new_filename = req.body.userId+"/profilePic/"+ req.file.originalname;
+            AWS_S3.uploadFileS3(new_filename, req.file.path)
+            .then((aws_s3_file) => {
+                User.findByIdAndUpdate(req.body.userId, {$set:{profilePicture:aws_s3_file.Location}},{new:true})
+                .then(old_photo => {
+                    deleteFile(req.file.destination, req.file.originalname)
+                    .then(()=>{
+                        res.send();
+                    })                    
+                })
+            })        
+        }     
     })
     .catch(err => {
         console.log(err);
