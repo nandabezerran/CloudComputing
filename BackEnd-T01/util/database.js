@@ -3,7 +3,7 @@ f = require('util').format,
 fs = require('fs');
 
 //Specify the Amazon DocumentDB cert
-var ca = [fs.readFileSync("rds-combined-ca-bundle.pem")];
+var ca = [fs.readFileSync("/opt/photo-app/BackEnd-T01/rds-combined-ca-bundle.pem")];
 
 let _db;
 
@@ -11,8 +11,9 @@ let _db;
 //  and specify the read preference as secondary preferred
 
 const mongoConnect = callback =>{
+
     MongoClient.connect(
-    'mongodb://photoAppData:cloud159@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
+    'mongodb://photoAppData:password@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
     { 
     sslValidate: true,
     sslCA:ca,
@@ -85,4 +86,21 @@ function(err, client) {
     callback(_db);
 });*/
 
-
+/*
+const mongoConnect = callback =>{
+    MongoClient.connect(
+    'mongodb://photoAppData:cloud159@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
+    { 
+    sslValidate: true,
+    sslCA:ca,
+    useNewUrlParser: true
+    }
+    ).then(client=>{
+        console.log("Mongo connected");
+        _db = client.db();
+        callback(_db);
+    }).catch(err =>{
+        console.log(err);
+        throw err; 
+    });
+*/
