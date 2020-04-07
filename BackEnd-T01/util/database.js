@@ -71,7 +71,7 @@ exports.mongoConnect = mongoConnect;
 exports.getDB = getDB;*/
 
 /*var mongoConnect = MongoClient.connect(
-'mongodb://photoAppData:cloud159@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
+'mongodb://photoAppData:password@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
 { 
   sslValidate: true,
   sslCA:ca,
@@ -82,14 +82,14 @@ function(err, client) {
         throw err;
 
     console.log("Mongo connected");
-    _db = client.db();
+    _db = sient.db();
     callback(_db);
 });*/
 
 /*
 const mongoConnect = callback =>{
     MongoClient.connect(
-    'mongodb://photoAppData:cloud159@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
+    'mongodb://photoAppData:password@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
     { 
     sslValidate: true,
     sslCA:ca,
