@@ -21,7 +21,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.feedService.getUserPhotos(params.term).subscribe(photoCards => {
-        console.log(photoCards);
         this.entries = photoCards;
         if(this.entries.length == 0 ){
           this.userService.getUser().subscribe(user => {
@@ -33,10 +32,9 @@ export class ProfileComponent implements OnInit {
         else{
           this.userName = this.entries[0].username;
           this.userAvatar = this.entries[0].userAvatar;
-          this.userService.getUser().subscribe(user => {
+          this.userService.getUserName(this.userName).subscribe(user => {
             this.name = user.name;
-          })
-          
+          });
         }
         
       });    

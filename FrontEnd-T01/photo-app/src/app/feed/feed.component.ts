@@ -45,7 +45,6 @@ export class FeedComponent implements OnInit {
     this.feedService.getFeedPhotosDate(this.model.dataInicial, this.model.dataFinal).subscribe(photoCards => {
       this.entries = photoCards;
     });
-    console.log(this.photoDatas);
   }
 
   processFile(imageInput: any) {

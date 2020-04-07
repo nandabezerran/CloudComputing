@@ -6,7 +6,6 @@ const AWS_S3 = require("../util/aws-s3.js");
 module.exports.findUserById = function(req, res){
     User.findOne({_id: req.params.id_session})
     .then(user => {
-        console.log(user);
         res.status(200).send(user);
         
     })
@@ -17,7 +16,7 @@ module.exports.findUserById = function(req, res){
 }
 
 module.exports.findUser = function(req, res){
-    User.find({username: req.params.username})
+    User.findOne({username: req.params.username})
     .then(user => {
         res.status(200).send(user)
     })

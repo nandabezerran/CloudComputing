@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit {
     reader.addEventListener('load', (event: any) => {
 
       this.selectedFile = new ImageSnippet(event.target.result, this.profilePic);
-      console.log(form.value.username);
       formData.append("username", form.value.username);
       formData.append("name", form.value.name);
       formData.append("password", form.value.password);

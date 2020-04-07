@@ -21,7 +21,6 @@ module.exports.userPhotos = function(req, res){
         Photo.find({userId: user._id})
         .then(photos => {  
             var resJson = photos.map(function(photo) {
-                // TODO youLiked user da sessao
                 return{_id:photo._id, userId: photo.userId, username: user.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photoUrl, userAvatar: user.profilePicture}
             })
             res.send(resJson);        

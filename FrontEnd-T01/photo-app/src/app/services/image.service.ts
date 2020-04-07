@@ -14,7 +14,6 @@ export class ImageService {
 
     formData.append('photoUrl', image);
     formData.append('userId', sessionStorage.getItem("id"));
-    console.log(image);
     return this.http.post<void>('/api/photos/', formData);
   }
 

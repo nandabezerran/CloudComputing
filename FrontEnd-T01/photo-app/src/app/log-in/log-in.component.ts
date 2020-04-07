@@ -30,7 +30,6 @@ export class LogInComponent implements OnInit {
   onSubmit(form) {
 
     this.userLogin = { username : form.value.userName, password : form.value.password };
-    console.log(this.userLogin);
     this.http.post('/api/users/login', this.userLogin)
       .subscribe(Response=> {
         
