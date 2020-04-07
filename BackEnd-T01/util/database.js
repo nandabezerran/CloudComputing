@@ -9,21 +9,25 @@ let _db;
 
 //Create a MongoDB client, open a connection to Amazon DocumentDB as a replica set, 
 //  and specify the read preference as secondary preferred
-var mongoConnect = MongoClient.connect(
-'mongodb://photoAppData:cloud159@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
-{ 
-  sslValidate: true,
-  sslCA:ca,
-  useNewUrlParser: true
-},
-function(err, client) {
-    if(err)
-        throw err;
 
-    console.log("Mongo connected");
-    _db = client.db();
-    callback(_db);
-});
+const mongoConnect = callback =>{
+
+    MongoClient.connect(
+    'mongodb://photoAppData:<insertYourPassword>@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
+    { 
+    sslValidate: true,
+    sslCA:ca,
+    useNewUrlParser: true
+    },
+    function(err, client) {
+        if(err)
+            throw err;
+
+        console.log("Mongo connected");
+        _db = client.db();
+        callback(_db);
+    });
+}
 
 const getDB = () => {
     if (_db){
@@ -65,4 +69,21 @@ const getDB = () => {
 
 exports.mongoConnect = mongoConnect;
 exports.getDB = getDB;*/
+
+/*var mongoConnect = MongoClient.connect(
+'mongodb://photoAppData:cloud159@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
+{ 
+  sslValidate: true,
+  sslCA:ca,
+  useNewUrlParser: true
+},
+function(err, client) {
+    if(err)
+        throw err;
+
+    console.log("Mongo connected");
+    _db = client.db();
+    callback(_db);
+});*/
+
 
