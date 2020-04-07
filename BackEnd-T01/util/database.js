@@ -82,7 +82,7 @@ function(err, client) {
         throw err;
 
     console.log("Mongo connected");
-    _db = sient.db();
+    _db = s2ient.db();
     callback(_db);
 });*/
 
