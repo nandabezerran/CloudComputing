@@ -32,8 +32,8 @@ const getDB = () => {
     throw 'No Database found';
 }
 
-exports.mongoConnect = client;
-exports.getDB = getDB 
+exports.mongoConnect = mongoConnect;
+exports.getDB = getDB;
 
 /*const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
