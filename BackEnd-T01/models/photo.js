@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://photoApp:cloud159@docdb-2020-04-07-18-11-00.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false', {useNewUrlParser: true});// Modificar pro endereço da AWS
+
+fs = require('fs');
+
+var ca = [fs.readFileSync("/opt/photo-app/BackEnd-T01/rds-combined-ca-bundle.pem")];
+
+mongoose.connect('mongodb://photoApp:cloud159@docdb-2020-04-07-18-11-00.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false', {sslValidate: true, sslCA:ca, useNewUrlParser: true});// Modificar pro endereço da AWS
 mongoose.set('useFindAndModify', false);
 
 const Schema = mongoose.Schema;
