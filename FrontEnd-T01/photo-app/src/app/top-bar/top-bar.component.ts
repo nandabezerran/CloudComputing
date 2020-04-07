@@ -39,6 +39,8 @@ export class TopBarComponent implements OnInit {
   }
 
   searchUser(username: string): void{
-    this.router.navigate(['profile', username]);
+    if(username.length > 0){
+      this.router.navigate(['profile', username]);
+    }
   }
 }
