@@ -13,7 +13,7 @@ let _db;
 const mongoConnect = callback =>{
 
     MongoClient.connect(
-    'mongodb://photoAppData:<insertYourPassword>@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
+    'mongodb://photoAppData:cloud159@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
     { 
     sslValidate: true,
     sslCA:ca,
