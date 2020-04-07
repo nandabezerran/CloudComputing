@@ -1,9 +1,6 @@
 var MongoClient = require('mongodb').MongoClient,
-f = require('util').format,
-fs = require('fs');
+f = require('util').format;
 
-//Specify the Amazon DocumentDB cert
-var ca = [fs.readFileSync("/opt/photo-app/BackEnd-T01/rds-combined-ca-bundle.pem")];
 
 let _db;
 
@@ -13,10 +10,8 @@ let _db;
 const mongoConnect = callback =>{
 
     MongoClient.connect(
-    'mongodb://photoAppData:<insertYourPassword>@docdb-2020-04-07-17-08-43.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
+    'mongodb://photoApp:cloud159@docdb-2020-04-07-18-11-00.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',
     { 
-    sslValidate: true,
-    sslCA:ca,
     useNewUrlParser: true
     },
     function(err, client) {
