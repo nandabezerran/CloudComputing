@@ -101,10 +101,16 @@ module.exports.findPhotoDate = function(req, res){
     Photo.find({}).populate('userId')
     .exec()
     .then(photo => {
+        console.log
         let dataI = new Date(req.body.dataInicial);
+        dataI.setDate(dataI.getDate() + 1);
         let dataF = new Date(req.body.dataFinal);
-        photo = photo.filter((p) => p.date.getTime() >= dataI.getTime() && p.date.getTime() <= dataF.getTime());
-        var resJson = photo.map(function(photo) {
+        dataF.setDate(dataF.getDate() + 1);
+        dataI = dataI.setHours(0,0,0,0)
+        dataF = dataF.setHours(0,0,0,0)      
+                
+        photo = photo.filter((p) => p.date.setHours(0,0,0,0) >= dataI && p.date.setHours(0,0,0,0) <= dataF);
+        var resJson = photo.map(function(photo) {            
             return{_id:photo._id, userId: photo.userId._id, username: photo.userId.username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photoUrl, userAvatar: photo.userId.profilePicture}
         });
         res.send(resJson);
