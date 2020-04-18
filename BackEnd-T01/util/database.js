@@ -1,4 +1,4 @@
-var MongoClient = require('mongodb').MongoClient,
+/*var MongoClient = require('mongodb').MongoClient,
 f = require('util').format,
 fs = require('fs');
 
@@ -37,9 +37,9 @@ const getDB = () => {
 }
 
 exports.mongoConnect = mongoConnect;
-exports.getDB = getDB;
+exports.getDB = getDB;*/
 
-/*const mongodb = require('mongodb');
+const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
 let _db;
@@ -68,7 +68,7 @@ const getDB = () => {
 }
 
 exports.mongoConnect = mongoConnect;
-exports.getDB = getDB;*/
+exports.getDB = getDB;
 
 /*var mongoConnect = MongoClient.connect(
 'mongodb://photoAppData:password@docdb-2020-04-05-18-39-37.cluster-clmniwzqtwwj.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false',

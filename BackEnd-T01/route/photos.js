@@ -1,14 +1,11 @@
 const controller = require("../controller/photos.js");
 const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, './public/uploads');
-     },
-    filename: function (req, file, cb) {
-        cb(null , file.originalname);
-    }
-});
-const parser = multer({ storage: storage });
+const parser = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+      fileSize: 5 * 1024 * 1024,
+    },
+  })
 
 module.exports = function(app){
     app.get("/api/photos/:username/:id_session", controller.userPhotos);

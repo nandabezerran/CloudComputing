@@ -1,8 +1,6 @@
 const Photo = require("../models/photo.js");
 const User = require("../models/user.js");
-const path = require('path');
-const fs = require('fs');
-const AWS_S3 = require("../util/aws-s3.js");
+const GC_STORAGE = require("../util/gcloud-storage.js");
 
 module.exports.photosPerTime = function(req,res){
     Photo.find().populate('userId')
@@ -31,41 +29,18 @@ module.exports.userPhotos = function(req, res){
     .catch(err => console.log(err));
 }
 
-function deleteFile(dir, file) {
-    return new Promise(function (resolve, reject) {
-        var filePath = path.join(dir, file);
-        fs.lstat(filePath, function (err, stats) {
-            if (err) {
-                return reject(err);
-            }
-            if (stats.isDirectory()) {
-                resolve(deleteDirectory(filePath));
-            } else {
-                fs.unlink(filePath, function (err) {
-                    if (err) {
-                        return reject(err);
-                    }
-                    resolve();
-                });
-            }
-        });
-    });
-};
-
 module.exports.addPhoto = function(req, res){
     const newPhoto = new Photo(req.body);
     newPhoto
     .save()
     .then(newPhoto => {
         const new_filename = newPhoto.userId+"/"+ req.file.originalname;
-        AWS_S3.uploadFileS3(new_filename, req.file.path)
-        .then((aws_s3_file ) => {
-            Photo.findByIdAndUpdate(newPhoto._id, {$set:{photoUrl:aws_s3_file.Location}},{new:true})
+        GC_STORAGE.uploadGCS(new_filename, req.file)
+        .then((gc_storage_file) => {s
+            Photo.findByIdAndUpdate(newPhoto._id, {$set:{photoUrl:gc_storage_file}},{new:true})
             .then(old_photo => {
-                deleteFile(req.file.destination, req.file.originalname)
-                .then(()=>{
-                    res.send();   
-                })                    
+                 res.send();   
+                                   
             })
         })
     })
