@@ -36,7 +36,7 @@ module.exports.addPhoto = function(req, res){
     .then(newPhoto => {
         const new_filename = newPhoto.userId+"/"+ req.file.originalname;
         GC_STORAGE.uploadGCS(new_filename, req.file)
-        .then((gc_storage_file) => {s
+        .then((gc_storage_file) => {
             Photo.findByIdAndUpdate(newPhoto._id, {$set:{photoUrl:gc_storage_file}},{new:true})
             .then(old_photo => {
                  res.send();   
