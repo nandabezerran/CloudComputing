@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
       formData.append("profilePicture", this.selectedFile.file);
       this.imageService.uploadUser(formData).subscribe(
         (res) => {
-          sessionStorage.setItem("id", res.toString());
+          sessionStorage.setItem("id", res['id']);
           this.router.navigate(['feed']);
         },
         (err) => {

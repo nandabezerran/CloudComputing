@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "photo-app-cloud-274317",
+  "private_key_id": "f49f7fedae303088661fb5759f0ece1a7443fccd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDGnQaIfXOy2Fda\nNSg7ZUFHY2DZjX60s8VIbzwjQLkHnI2IpsEkd+JtSsMzXCWCR/RoNNQmJ3Vb+mJA\nmjoHvivV1w3YOhFURJqJwL0hw/8Q5Fz8VPEl0XHe2aFXexJ5VXbjOVYdZjfPoDdH\njxHqEKjgP4Uj4f0+RqT9VXrSF4R8x/f9FggGjACchuBiQlrVsKYq6aa9gxjpjf+X\nY59p2oRRqUBUgs61YwGWf2YfUthFLz3ZGhjKRtLnk7k8VaACAPuu+rjGoNovzn08\nvDFiFu1C1QjCmaoQqB5lsbiMN8Rjprrz83UFylHLUSelCYwSLLTTTi33LiZMLwgP\n/VZdLdutAgMBAAECggEABbWl5m6U0ONfP3yft3VltwOoWRi0N8WjOj3YYLsPlqRt\nfSwuCTpZDANGMUfI3EHtSMGcB6zCtu4vvOOyH17cK72O7FRfAykluCgOR9Y2kum9\nspNOi2PF/j4LYVRsZ4iJbmbLjvTNTe6xKCF4xl3MPQYWcb2hZhTp0U6PxVJfwKaB\n+dbHLEf+ZQa49sz5gEPulgKOdiR5f5/Lft0abBIhGNw/MGnj1qLUv23arW5aXwjr\nQyGnbYQz6g0ZkAFM5fPd16w6GQ4V0LmpMPp49aPIRQbcjw6iZXS6/MoJDOZhWC0n\n9W2ajPmW+bjU+L54xiWIRd1Mnv9xeNUZhXH9jzq3kQKBgQD2/9uCW1K8UVU5oRJi\no1iJZMsugpsBtV0PdA4M4CrkPFGdBax71CRC7HxjtZ8DthR9TsgczPG5eW7BkfhJ\nWe6/MoXUraY11gWtfG4EepEBVQ/Td6SG0vV5dfnFZF8opyVkscIrsFO2H9/V2H4P\nXY/xeBmRZXn/xdH9wix1CSfVWwKBgQDN2cwMlzn9fzhyXovIvdXSlzh+qEyxAgLb\nqpcqBYjgW0Y9CR6UCAQgvCNVq1QyZm/F9/zYxfFwoaQ0Y9xmhS6HAvgu7gQJEHrT\nvaIoinrKqfKmFc1DS/K4S/qNqUhE9/QAkvch2YVKPAvbo9stz3mmFoH/c0HyTx43\nEhg3lTV5lwKBgQDc60FxWa8pgnGAxwFDuigBU2arpeNwZr/ih4HdoE6crxqsIBwC\n8V6xgQVMxXCBiETRQzqXD/OQWf1nIuD48ngpCM5MyDgmZNPVNLrORLYXg/ZQxO0i\nLeOjDJMnKzw1hzJZ2uf53Y8yEVZJ1YYCxkNtzWbI9gNlcpD8r8TFtTesiwKBgQCo\nm6y242dsa7ggdbCpTFTHmXV8yP2IPs14f9IxaTckDZ8Kf128gpRe+7s1gJAGeEE1\nNlq0c+2/A6csAl+U2aGylIwUZICJrCXvKXSZIFRTi8BkqZbneF3m9tTTE8VOOIpz\nre0enLzAgU51KVFtxHMvx1/TjOSHRKbLFNchL+YNIQKBgQDoXUHkJNztrR6ylVfy\n8r28AKmcsfrqz49uPF27yTEp8+fUidx10y598hOJv1QsVUHMG3STCMML79IiWi9c\ndYnrDslRe6q2r3qc3j8B+ZbKVMWocfEYKRzZr+aQtBhLb7CVeF/UXqjU1o/lvNeQ\nrzesSwubafkCOLFPGuEXgLTP8A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "photo-app-cloud-274317@appspot.gserviceaccount.com",
+  "client_id": "107959863151577849286",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/photo-app-cloud-274317%40appspot.gserviceaccount.com"
+}

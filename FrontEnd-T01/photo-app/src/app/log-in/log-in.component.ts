@@ -32,8 +32,7 @@ export class LogInComponent implements OnInit {
     this.userLogin = { username : form.value.userName, password : form.value.password };
     this.http.post('/api/users/login', this.userLogin)
       .subscribe(Response=> {
-        
-        sessionStorage.setItem("id", Response.toString());
+        sessionStorage.setItem("id", Response['id']);
         this.router.navigate(['feed']);
       
       },

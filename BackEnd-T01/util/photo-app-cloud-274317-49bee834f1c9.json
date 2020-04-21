@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "photo-app-cloud-274317",
+  "private_key_id": "49bee834f1c9f100ca91decb423b2f73144e3f31",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqh8VwafKdVY8J\nGtwBEt+uGDD47NjHwYEz6rgZQhgfAgJO9QYAsJnazYPJQmIk6pV7+MEYxJiWq3yW\nQ51w3qsrwo+pPwAAYz2u6gY1x4GkfZoqiHN3DQKVLyAs8cVT15YVm/ShpHlIprUl\nQCu9c2UuZItNOpbgYv4qmEan9Rvu9xSZ+G1ty3hhE7gu4ppJK14U3095iH9sMjME\n/4BbXpuXuoG3gX3unBS9YzPaLM+Wc40KFr9LqqGxPdAWYpZnHzyhj93dRIevCDPv\nLJXcChwCJLzX+u/b9skMPfWFEY8ketLq2Nla6wW1WqIlCaLpkyPgUsSduEEKAnCn\nD4E9Z/PBAgMBAAECggEAMAOnY0XpckQ3UEx4OnMqeLXGACiLxv6kVs5VRINYEE78\nAGg75vDSeQlZfE7NHHDSYwQAtm0QO4gQPazPBQsk7d7LnU8oPHO01+17jyPbzEkz\nIZumyxPmMMQCjrUKJteyIeZ15BdPsNWDdngReLenev8DO9ztw0MMJkkWx86bLVZ9\nlAxvPBo1loEUxshtGx2z2zzvCiP61HVPg+mgF50oMsjJ7HL0aNkYsn5VU3KhLPan\nHdgNjPEGrYs/48gvse+hx7gMC1udKKrGwZYNeK0Gl7bO8F4cBv9QxKcdNjAtUWQ+\naB2rQ0HIXxB9kDe8m1/ypu1De4lUmrBQ5Sp7eaeaEwKBgQDSxNPfkFTzXHH4NC6I\nsR56RxlyavSL/kC3PLCrFEXkdY+mU4Vy7AuFLIe4LUcdwX7lYP8IjvBz+lSNpUdy\ndnBvUxlvZdZ5TcgQOVY14oNVjH+cMTVpBd03DFrTGJkuUdRHay9p5nMdANO6uqFJ\nwp3R66nGEzI1O8a2OmUoLEI6vwKBgQDPIFRvOZx7T4Z92nVq8D1ZqN9WmCdgq4E7\n1ipjMWUefdYixe0IrNHXfA+EnOigjuBURi3wyKoQGcK0w/+2f2iOwpQ1DXLHpGRd\nOYGQzl29ofjb0qHBZQwYcpvHOOsB8Poio1mr7i37hQwGZGc2ixUP7wPKWFFzK2bR\nab1k64HxfwKBgQCC34EIEuEM89w42H4ElqZsGvXsHAmZW9jnbqHsuPvlLjJyfu4g\nO/2zRcFIVaURDvMyjxYNRGR+P3R9N6Gzq2OJXLowd7XDQM73dALaFrqiRkl+vPeD\nLQb9hYhoB6AmKN19M0sPoO7dlYPjMLuxx0yj6odS3NySPXnX8U6asVC2lQKBgQC6\nkH1dPgBUFdqni9nNfB1WoESjRCPb8D9UvWCqvjg90czKv4r1EG1m8iksIwVqcadg\nYWJKCwUbwYheuFihcnukc2F5s+ZaKxn32q941lkbUUTOBBiNEU5myvzD4uHTetJj\n1s0Tj1M9xaaCL3fEalyLYJgCb7DV0xcms17UA0mlUwKBgFsoB8B9K4npxjrimPuj\nPwYEIFrub5P75B4mXi6VuPf98Y8S9fzyZl6B1R/gfqPhjeuxF6Tb9jIkFMl6HiaK\nteEdQaNopyQro7FPB16CT8Lf/GSyn9I9CM0fMyXTPaa4yxuof8SR5aCf1aW0wRTb\nwflfioAJlERIn3cdaQmqOPsn\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-ulkgi@photo-app-cloud-274317.iam.gserviceaccount.com",
+  "client_id": "115458903020193907011",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ulkgi%40photo-app-cloud-274317.iam.gserviceaccount.com"
+}

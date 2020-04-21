@@ -37,6 +37,7 @@ export class FeedComponent implements OnInit {
 
     this.feedService.getFeedPhotos().subscribe(photoCards => {
       this.entries = photoCards;
+      console.log(photoCards)
     });
     this.user_id = sessionStorage.getItem("id");
   }
