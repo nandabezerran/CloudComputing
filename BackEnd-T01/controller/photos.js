@@ -50,29 +50,29 @@ module.exports.photosPerTime = async function (req, res) {
 module.exports.userPhotos = async function (req, res) {
     let photoList = [];
     let user = await db.collection('users').doc(req.params.id_session).get()
-    let photo  = await db.collection('photos').where('userId', '==', req.params.id_session).get()
-    .then(async snapshot => {
-        if (snapshot.empty) {
-            res.status(404).send('Photos not found');
-            return;
-        }
+    let photo = await db.collection('photos').where('userId', '==', req.params.id_session).get()
+        .then(async snapshot => {
+            if (snapshot.empty) {
+                res.status(404).send('Photos not found');
+                return;
+            }
 
-        else {
-            snapshot.forEach(async doc => {
-                data = {
-                    id: doc.id,
-                    userId: doc.data().userId,
-                    username: user.data().username,
-                    date: doc.data().date,
-                    likes: doc.data().likes.length - 1,
-                    youLiked: !!doc.data().likes.find(userId => (userId === req.params.id_session.toString())),
-                    postedPhoto: doc.data().photoUrl,
-                    userAvatar: user.data().profilePicture
-                }
-                photoList.push(data);
-            })
-        }
-    })
+            else {
+                snapshot.forEach(async doc => {
+                    data = {
+                        id: doc.id,
+                        userId: doc.data().userId,
+                        username: user.data().username,
+                        date: doc.data().date,
+                        likes: doc.data().likes.length - 1,
+                        youLiked: !!doc.data().likes.find(userId => (userId === req.params.id_session.toString())),
+                        postedPhoto: doc.data().photoUrl,
+                        userAvatar: user.data().profilePicture
+                    }
+                    photoList.push(data);
+                })
+            }
+        })
     res.send(photoList);
 
     /*User.findOne({ username: req.params.username })

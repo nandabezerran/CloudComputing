@@ -39,6 +39,8 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+.keys.json
+.photo-app-cloud-274317-49bee834f1c9.json
 
 # System Files
 .DS_Store
