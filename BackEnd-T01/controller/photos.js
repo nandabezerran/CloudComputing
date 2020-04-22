@@ -21,7 +21,7 @@ module.exports.photosPerTime = async function (req, res) {
             else {
                 snapshot.forEach(async doc => {
                     data = {
-                        id: doc.id,
+                        _id: doc.id,
                         userId: doc.data().userId,
                         date: doc.data().date,
                         likes: doc.data().likes.length - 1,
@@ -60,7 +60,7 @@ module.exports.userPhotos = async function (req, res) {
             else {
                 snapshot.forEach(async doc => {
                     data = {
-                        id: doc.id,
+                        _id: doc.id,
                         userId: doc.data().userId,
                         username: user.data().username,
                         date: doc.data().date,
@@ -109,8 +109,33 @@ module.exports.addPhoto = async function (req, res) {
 }
 
 
-module.exports.likeDislikePhoto = function (req, res) {
-    Photo.findOne({ _id: req.body._id })
+module.exports.likeDislikePhoto =  async function (req, res) {
+    data = {}
+    console.log(req.body.userId);
+    const photo = await db.collection('photos').doc(req.body._id).get()
+    .then(async photo => {
+        var liked = photo.data().likes ? !!photo.data().likes.find(x => (x === req.body.userId)) : false; 
+        photoList = photo.data().likes;
+        if (liked){
+            const index = photoList.indexOf(req.body.userId);
+            photoList.splice(index, 1);
+            data.likes = photoList;
+            liked = false;
+        }
+        else{
+            photoList.push(req.body.userId);
+            console.log(photoList);
+            data.likes = photoList;
+            liked = true;
+        }
+
+        const updtPhoto = await db.collection('photos').doc(photo.id).set(data, { merge: true })
+            .then(res.status(200).send())
+    })
+        .catch(err => console.log(err));
+
+    
+    /*Photo.findOne({ _id: req.body._id })
         .then(photo => {
             var liked = photo.likes ? !!photo.likes.find(x => (x === req.body.userId)) : false;
 
@@ -128,7 +153,7 @@ module.exports.likeDislikePhoto = function (req, res) {
                 .then(res.status(200).send());
 
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err));*/
 }
 
 module.exports.findPhotoDate = function (req, res) {
