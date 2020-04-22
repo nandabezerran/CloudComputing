@@ -9,7 +9,7 @@ const parser = multer({
 module.exports = function(app){
     app.get("/api/users/:id_session/", controller.findUserById);
     app.get("/api/users/username/:username/", controller.findUser);
-    app.get("/api/users/:name/", controller.findUserName);
+    app.put("/api/users/name/", controller.findUserName);
     app.post("/api/users",parser.single('profilePicture'), controller.addUser);
     app.put("/api/users",parser.single('profilePicture'), controller.updateUser);
     app.post("/api/users/login", controller.loginUser);

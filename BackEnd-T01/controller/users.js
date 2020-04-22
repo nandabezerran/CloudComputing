@@ -18,15 +18,6 @@ module.exports.findUserById = async function(req, res){
     else{
         res.status(200).send(user.data())
     }
-    /*User.findOne({_id: req.params.id_session})
-    .then(user => {
-        res.status(200).send(user);
-        
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(404).send("User not found");
-    });*/
 }
 
 module.exports.findUser = async function(req, res){
@@ -49,20 +40,12 @@ module.exports.findUser = async function(req, res){
         console.log('Error getting documents', err);
     });
     
-    /*User.findOne({username: req.params.username})
-    .then(user => {
-        res.status(200).send(user)
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(404).send("User not found");
-    });*/
 }
 
 module.exports.findUserName = async function(req, res){
     console.log('entrei na função')
     let users = db.collection('users');
-    let user = users.where('name', '==', req.params.name).get()
+    let user = users.where('name', '==', req.body.name).get()
     .then(snapshot => {
         if (snapshot.empty) {
             res.status(404).send('Name not found');
@@ -79,16 +62,6 @@ module.exports.findUserName = async function(req, res){
         console.log('Error getting documents', err);
     });
 
-
-    /*console.log(req.params.name);
-    User.exists({name: req.params.name})
-    .then(user => {
-        res.status(200).send(user)
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(404).send("User not found");
-    });*/
 }
 
 module.exports.addUser = async function(req, res){
@@ -117,35 +90,6 @@ module.exports.addUser = async function(req, res){
         });
         
     }
-
-    /*User.exists({username: req.body.username})
-    .then(user => {
-        if(user.username){
-            res.status(500).send("Username already in use");
-        }
-        else{
-            const user = new User(req.body);
-            user
-            .save()
-            .then(newUser => {
-                const new_filename = newUser._id+"/profilePic/"+ req.file.originalname;
-                GC_STORAGE.uploadGCS(new_filename, req.file)
-                .then((gc_storage_file) => {
-                    User.findByIdAndUpdate(newUser._id, {$set:{profilePicture:gc_storage_file}},{new:true})
-                    .then(old_photo => {
-                        res.status(200).send(newUser._id);
-                                            
-                    })
-                })
-            })
-            .catch((err => {
-                console.log(err);
-            }));  
-        }
-    })   
-    .catch((err => {
-        console.log(err);
-    }))*/
 }
 
 module.exports.updateUser = async function(req, res){
@@ -174,24 +118,7 @@ module.exports.updateUser = async function(req, res){
     }
 
 
-    /*User.findOneAndUpdate({_id:req.body.userId}, {$set:{name:req.body.name, password:req.body.password, email: req.body.email}},{new:true})
-    .then(old_aluno => {
-        if(req.file!=undefined){
-            const new_filename = req.body.userId+"/profilePic/"+ req.file.originalname;
-            GC_STORAGE.uploadGCS(new_filename, req.file)
-            .then((gc_storage_file) => {
-                User.findByIdAndUpdate(newUser._id, {$set:{profilePicture:gc_storage_file}},{new:true})
-                .then(old_photo => {
-                    res.status(200).send(newUser._id);
-                                        
-                })
-            })    
-        }     
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(404).send("User not found");
-    }); */
+
 }
 
 module.exports.loginUser = async function(req, res){
@@ -222,21 +149,6 @@ module.exports.loginUser = async function(req, res){
 
 
 
-    /*const users = await db.collection('users');
-    const username = await users.where('username', '==', req.body.username).get();
-    console.log(req.body.username)
-    if(!username.exists){
-        res.status(500).send("Username not found");
-    }
-    else{
-        if(username.password == '12345678'){
-            res.json({
-                id: user.id
-            });
-        }
-        else{
-            res.status(500).send("Password not found")
-        }
-    }*/
+
 }
 

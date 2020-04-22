@@ -20,24 +20,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.feedService.getUserPhotos(params.term).subscribe(photoCards => {
-        this.entries = photoCards;
-        if(this.entries.length == 0 ){
-          this.userService.getUser().subscribe(user => {
-            this.userName = user.username;
-            this.userAvatar = user.profilePicture;
-            this.name = user.name;
-          })
-        }
-        else{
-          this.userName = this.entries[0].username;
-          this.userAvatar = this.entries[0].userAvatar;
-          this.userService.getUserName(this.userName).subscribe(user => {
-            this.name = user.name;
-          });
-        }
-        
-      });    
+      this.userService.getName(params.term.toString()).subscribe(user =>{
+        this.userName = user.username;
+        this.userAvatar = user.profilePicture;
+        this.name = user.name;
+        this.feedService.getUserPhotos(user.username).subscribe(photoCards => {
+          this.entries = photoCards; 
+        }); 
+      });     
     });
   }
 }

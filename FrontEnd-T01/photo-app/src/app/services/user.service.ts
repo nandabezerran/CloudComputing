@@ -22,6 +22,10 @@ export class UserService {
     return this.http.get<UserInter>('/api/users/username/'+username);
   }
 
+  getName(name: string) : Observable<UserInter> {
+    return this.http.put<UserInter>('/api/users/name',{name: name});
+  }
+
   public editUser(formData: FormData): Observable<UserInter>{
     return this.http.put<UserInter>('api/users', formData).pipe(switchMap(() => this.getUser()
     ));

@@ -1,5 +1,3 @@
-const Photo = require("../models/photo.js");
-const User = require("../models/user.js");
 const GC_STORAGE = require("../util/gcloud-storage.js");
 const admin = require('firebase-admin');
 let db = admin.firestore();
