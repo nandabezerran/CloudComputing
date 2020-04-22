@@ -75,19 +75,7 @@ module.exports.userPhotos = async function (req, res) {
         })
     res.send(photoList);
 
-    /*User.findOne({ username: req.params.username })
-        .then(user => {
-            Photo.find({ userId: user._id })
-                .then(photos => {
-                    var resJson = photos.map(function (photo) {
-                        return { _id: photo._id, userId: photo.userId, username: user.username, date: photo.date, likes: photo.likes.length - 1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photoUrl, userAvatar: user.profilePicture }
-                    })
-                    res.send(resJson);
-                })
-                .catch(err => console.log(err));
 
-        })
-        .catch(err => console.log(err));*/
 }
 
 module.exports.addPhoto = async function (req, res) {
@@ -109,71 +97,85 @@ module.exports.addPhoto = async function (req, res) {
 }
 
 
-module.exports.likeDislikePhoto =  async function (req, res) {
+module.exports.likeDislikePhoto = async function (req, res) {
     data = {}
     console.log(req.body.userId);
     const photo = await db.collection('photos').doc(req.body._id).get()
-    .then(async photo => {
-        var liked = photo.data().likes ? !!photo.data().likes.find(x => (x === req.body.userId)) : false; 
-        photoList = photo.data().likes;
-        if (liked){
-            const index = photoList.indexOf(req.body.userId);
-            photoList.splice(index, 1);
-            data.likes = photoList;
-            liked = false;
-        }
-        else{
-            photoList.push(req.body.userId);
-            console.log(photoList);
-            data.likes = photoList;
-            liked = true;
-        }
-
-        const updtPhoto = await db.collection('photos').doc(photo.id).set(data, { merge: true })
-            .then(res.status(200).send())
-    })
-        .catch(err => console.log(err));
-
-    
-    /*Photo.findOne({ _id: req.body._id })
-        .then(photo => {
-            var liked = photo.likes ? !!photo.likes.find(x => (x === req.body.userId)) : false;
-
+        .then(async photo => {
+            var liked = photo.data().likes ? !!photo.data().likes.find(x => (x === req.body.userId)) : false;
+            photoList = photo.data().likes;
             if (liked) {
-                const index = photo.likes.indexOf(req.body.userId);
-                photo.likes.splice(index, 1);
+                const index = photoList.indexOf(req.body.userId);
+                photoList.splice(index, 1);
+                data.likes = photoList;
                 liked = false;
             }
             else {
-                photo.likes.push(req.body.userId);
+                photoList.push(req.body.userId);
+                console.log(photoList);
+                data.likes = photoList;
                 liked = true;
-
             }
-            photo.save()
-                .then(res.status(200).send());
 
+            const updtPhoto = await db.collection('photos').doc(photo.id).set(data, { merge: true })
+                .then(res.status(200).send())
         })
-        .catch(err => console.log(err));*/
+        .catch(err => console.log(err));
+
+
 }
 
-module.exports.findPhotoDate = function (req, res) {
-    Photo.find({}).populate('userId')
-        .exec()
-        .then(photo => {
+module.exports.findPhotoDate = async function (req, res) {
+    let data = {};
+    let photoList = [];
+    let resJson = [];
+    var size = 0;
+    const photos = await db.collection('photos').get()
+        .then(async snapshot => {
             let dataI = new Date(req.body.dataInicial);
             dataI.setDate(dataI.getDate() + 1);
             let dataF = new Date(req.body.dataFinal);
             dataF.setDate(dataF.getDate() + 1);
             dataI = dataI.setHours(0, 0, 0, 0)
             dataF = dataF.setHours(0, 0, 0, 0)
+            
+            
 
-            photo = photo.filter((p) => p.date.setHours(0, 0, 0, 0) >= dataI && p.date.setHours(0, 0, 0, 0) <= dataF);
-            var resJson = photo.map(function (photo) {
-                return { _id: photo._id, userId: photo.userId._id, username: photo.userId.username, date: photo.date, likes: photo.likes.length - 1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photoUrl, userAvatar: photo.userId.profilePicture }
-            });
-            res.send(resJson);
+            if (snapshot.empty) {
+                res.status(404).send('Photos not found');
+                return;
+            }
 
-
+            else {
+                snapshot.forEach(async doc => {
+                    dateDoc = new Date(doc.data().date)
+                    if (dateDoc.setHours(0, 0, 0, 0) >= dataI && dateDoc.setHours(0, 0, 0, 0) <= dataF) {
+                        data = {
+                            _id: doc.id,
+                            userId: doc.data().userId,
+                            date: doc.data().date,
+                            likes: doc.data().likes.length - 1,
+                            youLiked: !!doc.data().likes.find(userId => (userId === req.params.id_session.toString())),
+                            postedPhoto: doc.data().photoUrl,
+                        }
+                        photoList.push(data);
+                    }
+                })
+            }
         })
-        .catch(err => console.log(err));
+
+    if (photoList.length == 0) {
+        res.send(photoList);
+    }
+
+    photoList.forEach(async photo => {
+        const user = await db.collection('users').doc(photo.userId).get()
+        photo.username = user.data().username;
+        photo.userAvatar = user.data().profilePicture;
+        resJson.push(photo)
+        size = size + 1;
+        if (photoList.length == size) {
+            res.send(resJson);
+        }
+    })
 }
