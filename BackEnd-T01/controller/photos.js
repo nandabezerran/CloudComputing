@@ -46,12 +46,15 @@ module.exports.photosPerTime = async function (req, res) {
 
 
 module.exports.userPhotos = async function (req, res) {
+    let data = {};
     let photoList = [];
-    let user = await db.collection('users').doc(req.params.id_session).get()
-    let photo = await db.collection('photos').where('userId', '==', req.params.id_session).get()
+    let resJson = [];
+    var size = 0;
+
+    const users = await db.collection('users').where('username', '==', req.params.username).get()
         .then(async snapshot => {
             if (snapshot.empty) {
-                res.status(404).send('Photos not found');
+                res.status(404).send('Users not found');
                 return;
             }
 
@@ -59,22 +62,46 @@ module.exports.userPhotos = async function (req, res) {
                 snapshot.forEach(async doc => {
                     data = {
                         _id: doc.id,
-                        userId: doc.data().userId,
-                        username: user.data().username,
-                        date: doc.data().date,
-                        likes: doc.data().likes.length - 1,
-                        youLiked: !!doc.data().likes.find(userId => (userId === req.params.id_session.toString())),
-                        postedPhoto: doc.data().photoUrl,
-                        userAvatar: user.data().profilePicture
+                        username: doc.data().username,
+                        userAvatar: doc.data().profilePicture,
                     }
                     photoList.push(data);
                 })
             }
         })
-    res.send(photoList);
 
+    photoList.forEach(async users => {
+        const photo = await db.collection('photos').where('userId', '==', users._id).get()
+            .then(async snapshot => {
+                if (snapshot.empty) {
+                    res.status(404).send('Photos not found');
+                    return;
+                }
+                else {
+                    snapshot.forEach(async photos => {
+                        data = {
+                            _id: photos.id,
+                            username: users.username,
+                            userAvatar: users._id,
+                            userId: photos.data().userId,
+                            date: photos.data().date,
+                            likes: photos.data().likes.length - 1,
+                            youLiked: !!photos.data().likes.find(userId => (userId === req.params.id_session.toString())),
+                            postedPhoto: photos.data().photoUrl
 
+                        }
+                        resJson.push(data);
+                        size = size + 1;
+                    })
+                }
+                if (resJson.length == size) {
+                    res.send(resJson);
+                }
+            })
+
+    })
 }
+
 
 module.exports.addPhoto = async function (req, res) {
 
@@ -97,7 +124,6 @@ module.exports.addPhoto = async function (req, res) {
 
 module.exports.likeDislikePhoto = async function (req, res) {
     data = {}
-    console.log(req.body.userId);
     const photo = await db.collection('photos').doc(req.body._id).get()
         .then(async photo => {
             var liked = photo.data().likes ? !!photo.data().likes.find(x => (x === req.body.userId)) : false;
@@ -110,7 +136,6 @@ module.exports.likeDislikePhoto = async function (req, res) {
             }
             else {
                 photoList.push(req.body.userId);
-                console.log(photoList);
                 data.likes = photoList;
                 liked = true;
             }
@@ -131,13 +156,13 @@ module.exports.findPhotoDate = async function (req, res) {
     const photos = await db.collection('photos').get()
         .then(async snapshot => {
             let dataI = new Date(req.body.dataInicial);
-            dataI.setDate(dataI.getDate() + 1);
+            dataI.setDate(dataI.getDate());
             let dataF = new Date(req.body.dataFinal);
-            dataF.setDate(dataF.getDate() + 1);
+            dataF.setDate(dataF.getDate());
             dataI = dataI.setHours(0, 0, 0, 0)
             dataF = dataF.setHours(0, 0, 0, 0)
-            
-            
+
+
 
             if (snapshot.empty) {
                 res.status(404).send('Photos not found');

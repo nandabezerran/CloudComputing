@@ -43,7 +43,6 @@ export class TopBarComponent implements OnInit {
   searchUser(name: string): void{
     if(name.length > 0){
       this.userService.getName(name).subscribe(user =>{
-        console.log('entrou');
         this.router.navigate(['profile', name]);
       },
       (error: HttpErrorResponse) => {
