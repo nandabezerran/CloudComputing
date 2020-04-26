@@ -48,7 +48,7 @@ export class UpdateProfileComponent implements OnInit {
 
       this.userService.editUser(formData).subscribe(
         (res) => {
-          this.router.navigate(['profile', res.username]);
+          this.router.navigate(['feed']);
         },
         (err) => {
         
