@@ -1,6 +1,6 @@
 const GC_STORAGE = require("../util/gcloud-storage.js");
 const admin = require('firebase-admin');
-let serviceAccount = require('../util/photo-app-cloud-274317-49bee834f1c9.json');
+let serviceAccount = require('../util/photo-app-cloud-276315-87209affba8a.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)

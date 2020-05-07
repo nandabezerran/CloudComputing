@@ -1,128 +1,112 @@
 const GC_STORAGE = require("../util/gcloud-storage.js");
 const admin = require('firebase-admin');
 let db = admin.firestore();
-
-
+const Pool = require('pg').Pool
+const pool = new Pool({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'photo-app',
+    password: 'admin',
+    port: 5432,
+})
 
 module.exports.photosPerTime = async function (req, res) {
-    let data = {};
-    let photoList = [];
-    let resJson = [];
+    var resJson = [];
+    var aux = [];
     var size = 0;
-    const photos = await db.collection('photos').get()
-        .then(async snapshot => {
-            if (snapshot.empty) {
-                res.status(404).send('Photos not found');
-                return;
-            }
-
-            else {
-                snapshot.forEach(async doc => {
-                    data = {
-                        _id: doc.id,
-                        userId: doc.data().userId,
-                        date: doc.data().date,
-                        likes: doc.data().likes.length - 1,
-                        youLiked: !!doc.data().likes.find(userId => (userId === req.params.id_session.toString())),
-                        postedPhoto: doc.data().photoUrl,
-                    }
-                    photoList.push(data);
-                })
-            }
-        })
-    photoList.forEach(async photo => {
-        const user = await db.collection('users').doc(photo.userId).get()
-        photo.username = user.data().username;
-        photo.userAvatar = user.data().profilePicture;
-        resJson.push(photo)
-        size = size + 1;
-        if (photoList.length == size) {
-            res.send(resJson);
+    pool.query('SELECT * FROM photos', (error, results) => {
+        if (error) {
+          throw error
         }
-    })
 
+        Promise.all(
+            aux = (results.rows).map(async function(photo) {
+            return{_id:photo.id, userId: photo.user_id, username: "undefined", date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photo_url, userAvatar: "undefined"}
+
+        }))
+        .then(resultsJson => {
+            resultsJson.forEach(async photo => {
+            const user = await db.collection('users').doc(photo.userId).get()
+            photo.username = user.data().username;
+            photo.userAvatar = user.data().profilePicture;
+            resJson.push(photo)
+            size = size + 1;
+            if (resultsJson.length == size) {
+                res.send(resJson);
+            }
+        })});
+    })
+    
 
 }
 
-
 module.exports.userPhotos = async function (req, res) {
-    let photoList = [];
-    let user = await db.collection('users').doc(req.params.id_session).get()
-    let photo = await db.collection('photos').where('userId', '==', req.params.id_session).get()
-        .then(async snapshot => {
-            if (snapshot.empty) {
-                res.status(404).send('Photos not found');
-                return;
+    var resJson;
+    Promise.resolve( db.collection('users').doc(req.params.id_session).get())
+    .then(user => {
+        pool.query('SELECT * FROM photos WHERE user_id = $1',
+        [String(req.params.id_session)], (error, results) => {
+            if (error) {
+            throw error
             }
-
-            else {
-                snapshot.forEach(async doc => {
-                    data = {
-                        _id: doc.id,
-                        userId: doc.data().userId,
-                        username: user.data().username,
-                        date: doc.data().date,
-                        likes: doc.data().likes.length - 1,
-                        youLiked: !!doc.data().likes.find(userId => (userId === req.params.id_session.toString())),
-                        postedPhoto: doc.data().photoUrl,
-                        userAvatar: user.data().profilePicture
-                    }
-                    photoList.push(data);
-                })
-            }
+            resJson = (results.rows).map(function(photo) {
+                return{_id:photo.id, userId: photo.user_id, username: user.data().username, date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photo_url, userAvatar:  user.data().profilePicture}
+            });
+            res.send(resJson);
         })
-    res.send(photoList);
-
+    })
+    
+    
 
 }
 
 module.exports.addPhoto = async function (req, res) {
-
-    const data = {
-        userId: req.body.userId,
-        date: Date.now(),
-        likes: ["0"],
-    }
-    const addPhoto = await db.collection('photos').add(data);
-    const new_filename = data.userId + "/" + req.file.originalname;
+    const new_filename = req.body.userId + "/" + req.file.originalname;
     await GC_STORAGE.uploadGCS(new_filename, req.file)
         .then(async (gc_storage_file) => {
-            data.photoUrl = gc_storage_file;
-            const updtPhoto = await db.collection('photos').doc(addPhoto.id).set(data, { merge: true })
+            const userId= req.body.userId;
+            const date= Date.now();
+            const likes= ["0"];
+            pool.query('INSERT INTO photos (user_id, likes,date, photo_url) VALUES ($1, $3, $2, $4)', [userId, date, likes, gc_storage_file], (error, results) => {
+                if (error) {
+                throw error
+                }
+                res.status(200).send()
+                
+            })
         })
-    res.send()
-
 }
-
 
 module.exports.likeDislikePhoto = async function (req, res) {
     data = {}
-    console.log(req.body.userId);
-    const photo = await db.collection('photos').doc(req.body._id).get()
-        .then(async photo => {
-            var liked = photo.data().likes ? !!photo.data().likes.find(x => (x === req.body.userId)) : false;
-            photoList = photo.data().likes;
-            if (liked) {
-                const index = photoList.indexOf(req.body.userId);
-                photoList.splice(index, 1);
-                data.likes = photoList;
-                liked = false;
+    pool.query('SELECT * FROM photos WHERE id = $1', [req.body._id], (error, results) => {
+        if (error) {
+          throw error
+        }
+        var liked = (results.rows)[0].likes ? !!(results.rows)[0].likes.find(x => (x === req.body.userId)) : false;
+        photoList = results.rows;
+        if (liked) {
+            const index = photoList[0].likes.indexOf(req.body.userId);
+            photoList[0].likes.splice(index, 1);
+            liked = false;
+        }
+        else {
+            photoList[0].likes.push(req.body.userId);
+            liked = true;
+        }
+        pool.query(
+            'UPDATE photos SET likes = $1 WHERE id = $2',
+            [photoList[0].likes, req.body._id],
+            (error, results) => {
+                if (error) {
+                throw error
+                }
+                res.status(200).send();
             }
-            else {
-                photoList.push(req.body.userId);
-                console.log(photoList);
-                data.likes = photoList;
-                liked = true;
-            }
-
-            const updtPhoto = await db.collection('photos').doc(photo.id).set(data, { merge: true })
-                .then(res.status(200).send())
-        })
-        .catch(err => console.log(err));
-
-
+        )
+    })
 }
-
+/*
 module.exports.findPhotoDate = async function (req, res) {
     let data = {};
     let photoList = [];
@@ -176,4 +160,4 @@ module.exports.findPhotoDate = async function (req, res) {
             res.send(resJson);
         }
     })
-}
+}*/

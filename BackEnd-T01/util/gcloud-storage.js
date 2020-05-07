@@ -3,7 +3,7 @@ const {Storage} = require('@google-cloud/storage')
 const fs = require('fs');
 const gc = new Storage({
     keyFilename: 'util/keys.json',
-    projectId: 'photo-app-cloud-274317'
+    projectId: 'photo-app-cloud-276315'
 })
 
 const photosBucket = gc.bucket('photo-app-photos');
