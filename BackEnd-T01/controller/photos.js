@@ -26,18 +26,17 @@ module.exports.photosPerTime = async function (req, res) {
         }))
         .then(resultsJson => {
             resultsJson.forEach(async photo => {
-            const user = await db.collection('users').doc(photo.userId).get()
-            photo.username = user.data().username;
-            photo.userAvatar = user.data().profilePicture;
-            resJson.push(photo)
-            size = size + 1;
-            if (resultsJson.length == size) {
-                res.send(resJson);
-            }
-        })});
+                const user = await db.collection('users').doc(photo.userId).get()
+                photo.username = user.data().username;
+                photo.userAvatar = user.data().profilePicture;
+                resJson.push(photo)
+                size = size + 1;
+                if (resultsJson.length == size) {
+                    res.send(resJson);
+                }
+            })
+        });
     })
-    
-
 }
 
 module.exports.userPhotos = async function (req, res) {
@@ -55,9 +54,6 @@ module.exports.userPhotos = async function (req, res) {
             res.send(resJson);
         })
     })
-    
-    
-
 }
 
 module.exports.addPhoto = async function (req, res) {
@@ -69,7 +65,7 @@ module.exports.addPhoto = async function (req, res) {
             const likes= ["0"];
             pool.query('INSERT INTO photos (user_id, likes,date, photo_url) VALUES ($1, $3, $2, $4)', [userId, date, likes, gc_storage_file], (error, results) => {
                 if (error) {
-                throw error
+                    throw error
                 }
                 res.status(200).send()
                 
@@ -106,58 +102,58 @@ module.exports.likeDislikePhoto = async function (req, res) {
         )
     })
 }
-/*
+
 module.exports.findPhotoDate = async function (req, res) {
-    let data = {};
     let photoList = [];
     let resJson = [];
     var size = 0;
-    const photos = await db.collection('photos').get()
-        .then(async snapshot => {
-            let dataI = new Date(req.body.dataInicial);
-            dataI.setDate(dataI.getDate() + 1);
-            let dataF = new Date(req.body.dataFinal);
-            dataF.setDate(dataF.getDate() + 1);
-            dataI = dataI.setHours(0, 0, 0, 0)
-            dataF = dataF.setHours(0, 0, 0, 0)
-            
-            
-
-            if (snapshot.empty) {
-                res.status(404).send('Photos not found');
-                return;
-            }
-
-            else {
-                snapshot.forEach(async doc => {
-                    dateDoc = new Date(doc.data().date)
-                    if (dateDoc.setHours(0, 0, 0, 0) >= dataI && dateDoc.setHours(0, 0, 0, 0) <= dataF) {
-                        data = {
-                            _id: doc.id,
-                            userId: doc.data().userId,
-                            date: doc.data().date,
-                            likes: doc.data().likes.length - 1,
-                            youLiked: !!doc.data().likes.find(userId => (userId === req.params.id_session.toString())),
-                            postedPhoto: doc.data().photoUrl,
-                        }
-                        photoList.push(data);
-                    }
-                })
-            }
-        })
-
-    if (photoList.length == 0) {
-        res.send(photoList);
-    }
-
-    photoList.forEach(async photo => {
-        const user = await db.collection('users').doc(photo.userId).get()
-        photo.username = user.data().username;
-        photo.userAvatar = user.data().profilePicture;
-        resJson.push(photo)
-        size = size + 1;
-        if (photoList.length == size) {
-            res.send(resJson);
+    Promise.resolve(
+    pool.query('SELECT * FROM photos', (error, results) => {
+        if (error) {
+          throw error
         }
-    })
-}*/
+
+        Promise.all(
+            aux = (results.rows).map(async function(photo) {
+            return{_id:photo.id, userId: photo.user_id, username: "undefined", date: photo.date, likes: photo.likes.length-1, youLiked: !!photo.likes.find(userId => (userId === req.params.id_session.toString())), postedPhoto: photo.photo_url, userAvatar: "undefined"}
+
+        }))
+        .then(resultsJson => {
+            resultsJson.forEach(async photo => {
+                let dataI = new Date(req.body.dataInicial);
+                dataI.setDate(dataI.getDate() + 1);
+                let dataF = new Date(req.body.dataFinal);
+                dataF.setDate(dataF.getDate() + 1);
+                dataI = dataI.setHours(0, 0, 0, 0);
+                dataF = dataF.setHours(0, 0, 0, 0);
+
+                if (resultsJson.empty) {
+                    res.status(404).send('Photos not found');
+                    return;
+                }
+    
+                else {
+                    resultsJson.forEach(async doc => {
+                        dateDoc = new Date(parseInt(doc.date));
+                        if (dateDoc.setHours(0, 0, 0, 0) >= dataI && dateDoc.setHours(0, 0, 0, 0) <= dataF) {
+                            photoList.push(doc);
+                        }
+                    })
+                }
+            })
+            if (photoList.length == 0) {
+                res.send(photoList);
+            }
+            photoList.forEach(async photo => {
+                const user = await db.collection('users').doc(photo.userId).get()
+                photo.username = user.data().username;
+                photo.userAvatar = user.data().profilePicture;
+                resJson.push(photo)
+                size = size + 1;
+                if (photoList.length == size) {
+                    res.send(resJson);
+                }
+            })      
+        })  
+    }))    
+}
