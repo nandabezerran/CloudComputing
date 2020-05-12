@@ -121,9 +121,9 @@ module.exports.findPhotoDate = async function (req, res) {
         .then(resultsJson => {
             resultsJson.forEach(async photo => {
                 let dataI = new Date(req.body.dataInicial);
-                dataI.setDate(dataI.getDate() + 1);
+                dataI.setDate(dataI.getDate());
                 let dataF = new Date(req.body.dataFinal);
-                dataF.setDate(dataF.getDate() + 1);
+                dataF.setDate(dataF.getDate());
                 dataI = dataI.setHours(0, 0, 0, 0);
                 dataF = dataF.setHours(0, 0, 0, 0);
 
