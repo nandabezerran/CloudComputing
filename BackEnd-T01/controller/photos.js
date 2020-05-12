@@ -4,7 +4,7 @@ let db = admin.firestore();
 const Pool = require('pg').Pool
 const pool = new Pool({
     user: 'postgres',
-    host: 'localhost',
+    host: '172.16.238.11',
     database: 'photo-app',
     password: 'admin',
     port: 5432,

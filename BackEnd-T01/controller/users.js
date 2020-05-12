@@ -21,7 +21,6 @@ module.exports.findUserById = async function(req, res){
 }
 
 module.exports.findUser = async function(req, res){
-    console.log('entrei na função')
     let users = db.collection('users');
     let user = users.where('username', '==', req.params.username).get()
     .then(snapshot => {
@@ -31,8 +30,6 @@ module.exports.findUser = async function(req, res){
         }
 
         snapshot.forEach(doc => {
-            console.log('entrei')
-            console.log(doc.data())
             res.status(200).send(doc.data())
         });
     })
@@ -43,7 +40,6 @@ module.exports.findUser = async function(req, res){
 }
 
 module.exports.findUserName = async function(req, res){
-    console.log('entrei na função')
     let users = db.collection('users');
     let user = users.where('name', '==', req.body.name).get()
     .then(snapshot => {
@@ -53,8 +49,6 @@ module.exports.findUserName = async function(req, res){
         }
 
         snapshot.forEach(doc => {
-            console.log('entrei')
-            console.log(doc.data())
             res.status(200).send(doc.data())
         });
     })
@@ -81,7 +75,6 @@ module.exports.addUser = async function(req, res){
         await GC_STORAGE.uploadGCS(new_filename, req.file)
         .then( async (gc_storage_file) => {
             data.profilePicture = gc_storage_file;
-            console.log(data);
             const updtUser = await db.collection('users').doc(addUser.id).set(data, { merge: true })
         })
         
@@ -94,13 +87,11 @@ module.exports.addUser = async function(req, res){
 
 module.exports.updateUser = async function(req, res){
     const id = req.body.userId;
-    console.log(id);
     const user = await db.collection('users').doc(id).get()
     if (!user.exists){
         res.status(500).send("Username not found");
     }
     else{
-        console.log("entrou no else do update")
         const data = {
             name: req.body.name,
             password: req.body.password,
