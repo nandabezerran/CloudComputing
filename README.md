@@ -3,7 +3,7 @@
 Aplicação web hospedada no docker
 ## Iniciando serviços com docker compose
 * Crie um arquivo docker-compose.yaml 
-	> Insira no corpo do arquivo
+	- Insira no corpo do arquivo
 	```
 	version: "3"
   services:
@@ -60,13 +60,13 @@ Aplicação web hospedada no docker
   
 ## Criação Imagens
 * Faça um clone do repositório
-	> git clone https://github.com/nandabezerran/CloudComputing.git
-	> git checkout gcp_relationaldb
+	- git clone https://github.com/nandabezerran/CloudComputing.git
+	- git checkout gcp_relationaldb
 * Criando imagem do node
-	> cd CloudComputing
-	> cd BackEnd-T01
-	> sudo nano DockerFile
-	> Insira no corpo do arquivo
+	- cd CloudComputing
+	- cd BackEnd-T01
+	- sudo nano DockerFile
+	- Insira no corpo do arquivo
     ```
     FROM node:10
 
