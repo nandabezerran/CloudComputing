@@ -53,7 +53,7 @@ version: "3"
 	    config:  
 	       - subnet: 172.16.238.0/24
   ```
-	- docker-compose up
+- docker-compose up
   
 ## Criação Imagens
 * Faça um clone do repositório
