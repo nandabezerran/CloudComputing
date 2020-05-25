@@ -18,30 +18,36 @@ public class WordCount {
     private Text word = new Text();
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
     	String line = value.toString();
-	    StringTokenizer tokenizer = new StringTokenizer(line);
+	    StringTokenizer tuple = new StringTokenizer(line, "\n");
 	    int count = 0;
 	    List<String> tweet = new ArrayList<String>();
-	    while (tokenizer.hasMoreTokens()) {
-			String token = tokenizer.nextToken();
-			if(count == 1){
-				StringTokenizer tAux = new StringTokenizer(token);
-				while(tAux.hasMoreTokens()){
-					String token2 = tAux.nextToken();
-					if(token2.startsWith("#")){
-						tweet.add(token2.toLowerCase());
+	    while (tuple.hasMoreTokens()) {
+			String token = tuple.nextToken();
+			StringTokenizer tupleElements = new StringTokenizer(token, "\t");
+			while(tupleElements.hasMoreTokens()) {
+				String element = tupleElements.nextToken();
+				if(count == 1){
+					StringTokenizer tweetWords = new StringTokenizer(element, " ");
+					while(tweetWords.hasMoreTokens()){
+						String words = tweetWords.nextToken();
+						if(words.startsWith("#")){
+							tweet.add(words.toLowerCase());
+						}
 					}
 				}
-			}
-			if(count == 7){
-				String[] aux = token.split(" ");
-				String t = aux[1].concat(aux[2]);
-				for (int i = 0; i < tweet.size(); i++) {
-					word.set(t.concat(tweet.get(i)));
-					context.write(word, one);
+				if(count == 7){
+					String[] aux = element.split(" ");
+					String t = aux[1].concat(aux[2]);
+					for (int i = 0; i < tweet.size(); i++) {
+						word.set(t.concat(tweet.get(i)));
+						context.write(word, one);
+					}
 				}
+				count++;	
 			}
-			count++;	
+			
 	    }
+
     }
  }
      
