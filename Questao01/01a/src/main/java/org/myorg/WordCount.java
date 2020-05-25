@@ -18,7 +18,7 @@ public class WordCount {
     private Text word = new Text();
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
     	String line = value.toString();
-	    StringTokenizer tokenizer = new StringTokenizer(line);
+	    StringTokenizer tokenizer = new StringTokenizer(line, "\n");
 	    int count = 0;
 	    List<String> tweet = new ArrayList<String>();
 	    while (tokenizer.hasMoreTokens()) {
