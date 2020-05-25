@@ -10,6 +10,7 @@ import org.apache.hadoop.mapreduce.*;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+
 public class WordCount {
      
  public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
@@ -66,7 +67,7 @@ public class WordCount {
 	    context.write(key, new IntWritable(sum));   
     }
  }
-     
+
 	 public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 	     
