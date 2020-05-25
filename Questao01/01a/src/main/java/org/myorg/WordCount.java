@@ -18,40 +18,45 @@ public class WordCount {
     private Text word = new Text();
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
     	String line = value.toString();
-	    StringTokenizer tokenizer = new StringTokenizer(line, "\n");
+	    StringTokenizer tuple = new StringTokenizer(line, "\n");
 	    int count = 0;
 	    List<String> tweet = new ArrayList<String>();
-	    while (tokenizer.hasMoreTokens()) {
-			String token = tokenizer.nextToken();
-			if(count == 1){
-				StringTokenizer tAux = new StringTokenizer(token);
-				while(tAux.hasMoreTokens()){
-					String token2 = tAux.nextToken();
-					if(token2.startsWith("#")){
-						tweet.add(token2.toLowerCase());
+	    while (tuple.hasMoreTokens()) {
+			String token = tuple.nextToken();
+			StringTokenizer tupleElements = new StringTokenizer(token, "\t");
+			while(tupleElements.hasMoreTokens()) {
+				String element = tupleElements.nextToken();
+				if(count == 1){
+					StringTokenizer tweetWords = new StringTokenizer(element, " ");
+					while(tweetWords.hasMoreTokens()){
+						String words = tweetWords.nextToken();
+						if(words.startsWith("#")){
+							tweet.add(words.toLowerCase());
+						}
 					}
 				}
+				if(count == 7){
+					String[] aux = element.split(" ");
+					String[] time = aux[3].split(":");
+					String t;
+					int timeInt = Integer.parseInt(time[0]);
+					if(6 < timeInt && timeInt < 12){
+						t = "M";
+					}
+					else if(12 < timeInt && timeInt < 18){
+						t = "T";
+					}
+					else{
+						t = "N";
+					}
+					for (int i = 0; i < tweet.size(); i++) {
+						word.set(t.concat(tweet.get(i)));
+						context.write(word, one);
+					}
+				}
+				count++;	
 			}
-			if(count == 7){
-				String[] aux = token.split(" ");
-				String[] time = aux[3].split(":");
-				String t;
-				int timeInt = Integer.parseInt(time[0]);
-				if(6 < timeInt && timeInt < 12){
-					t = "M";
-				}
-				else if(12 < timeInt && timeInt < 18){
-					t = "T";
-				}
-				else{
-					t = "N";
-				}
-				for (int i = 0; i < tweet.size(); i++) {
-					word.set(t.concat(tweet.get(i)));
-					context.write(word, one);
-				}
-			}
-			count++;	
+			
 	    }
     }
  }
